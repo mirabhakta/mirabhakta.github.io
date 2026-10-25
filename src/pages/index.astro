@@ -1,0 +1,28 @@
+---
+// Phase 2A page: header, hero and the approved ledger-rule detail.
+// Phase 2B replaced the phase anchors with the full homepage sections.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import SelectedWork from '../components/SelectedWork.astro';
+import Research from '../components/Research.astro';
+import Experience from '../components/Experience.astro';
+import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
+---
+
+<BaseLayout
+  title="Mira Bhakta — AI & Software Engineer"
+  description="Mira Bhakta builds intelligent systems, AI agents, context infrastructure, and software for safety and financial decisions."
+>
+  <div id="top"></div>
+  <Nav />
+  <main>
+    <Hero />
+    <SelectedWork />
+    <Research />
+    <Experience />
+    <About />
+    <Contact />
+  </main>
+</BaseLayout>

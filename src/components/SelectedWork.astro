@@ -1,0 +1,322 @@
+---
+// Selected Work — quiet ledger with side preview (Soft Monument direction
+// section: work-quiet-ledger-preview). Descriptions verified from each
+// project's README and repository; no invented metrics or features.
+interface Project {
+  name: string;
+  kind: string;
+  description: string;
+  year?: string;
+  // Public project: the canonical public repository URL. Private project:
+  // omitted, and the row is presented as a private build instead of a link.
+  href?: string;
+  preview: string;
+  alt: string;
+  caption: string;
+  // Natural pixel size of the verified screenshot, so every frame can use the
+  // source ratio and no UI is cropped away.
+  width: number;
+  height: number;
+}
+
+const projects: Project[] = [
+  {
+    name: 'ContextOS',
+    kind: 'Context & memory infrastructure',
+    description:
+      'Keeps what AI assistants think they know about you under your control. Import conversations from ChatGPT, Gemini, or Claude, review every claim against its source, and export an approved context pack other tools can use. Everything runs locally, and nothing is uploaded.',
+    year: '2026',
+    preview: '/work/contextos.png',
+    alt: 'ContextOS project artwork showing the product name and the statement “See everything your AIs think they know about you.”',
+    caption: 'Local-first · Windows MVP',
+    width: 1200,
+    height: 630,
+  },
+  {
+    name: 'LedgerGuard',
+    kind: 'Financial review & decision workflows',
+    description:
+      'Stops an AI agent from moving money on a hunch. Model-based checks score each decision for risk, but only fixed policy code can approve it, so every action can be traced and explained before it runs.',
+    year: '2026',
+    href: 'https://github.com/mirabhakta/Teller',
+    preview: '/work/ledgerguard.png',
+    alt: 'LedgerGuard console showing scenario selection, an evaluation pipeline blocked by a duplicate-payment policy, and a live event stream.',
+    caption: 'LA Hacks 2026 · Intuit challenge',
+    width: 1440,
+    height: 900,
+  },
+  {
+    name: 'Kandor',
+    kind: 'Conversation safety review',
+    description:
+      'A Chrome extension that watches supported chats for grooming, manipulation, and scam patterns as they happen, then explains the risk, quotes the messages that triggered it, and suggests what to do next.',
+    year: '2026',
+    href: 'https://github.com/mirabhakta/kandor',
+    preview: '/work/kandor.png',
+    alt: 'Kandor extension detecting risky phrases in a chat, with an alert panel listing risk, confidence, and a recommended action.',
+    caption: 'Hacktech 2026 · Caltech',
+    width: 1400,
+    height: 904,
+  },
+  {
+    name: 'VoiceStudio Live',
+    kind: 'Voice conversion & audio processing',
+    description:
+      'A desktop workspace for real-time voice work: hear your own voice through the chain, change pitch while you speak, and convert it with RVC models, with queue depth and latency shown so you can hear exactly what the delay is.',
+    preview: '/work/voicestudio-live.png',
+    alt: 'VoiceStudio studio workspace with a script field, voice source controls, an active voice panel, and generation history.',
+    caption: 'Local-first · Electron app',
+    width: 1200,
+    height: 750,
+  },
+];
+---
+
+<section class="work page-gutter" id="work" aria-labelledby="work-title">
+  <div class="work__head">
+    <h2 class="work__title" id="work-title">Selected Work</h2>
+    <p class="work__intro">
+      Four projects across context infrastructure, financial review, conversation
+      safety, and voice, each one built to make an intelligent system more
+      legible.
+    </p>
+  </div>
+
+  <div class="work__register" aria-hidden="true">
+    <svg class="work__register-svg" viewBox="0 0 320 24" role="presentation">
+      <path class="work__register-base" d="M4 12h312" />
+      {
+        projects.map((_, index) => (
+          <path
+            class="work__register-mark"
+            style={`--i: ${index}`}
+            d={[
+              'M16 6v12',
+              'M36 6v12M32 12h8',
+              'M56 6v12M60 12h-4M60 12v-3',
+              'M76 6v12M72 12h8M76 18h8',
+            ][index]}
+          />
+        ))
+      }
+    </svg>
+  </div>
+
+  <div class="work__ledger">
+    <ul class="work__list">
+      {
+        projects.map((project) => (
+          <li class="work__item work__reveal">
+            {project.href ? (
+              <a
+                class="work__row"
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-preview={project.preview}
+                data-caption={project.caption}
+                data-ratio={`${project.width} / ${project.height}`}
+              >
+                <span class="work__name work__reveal" style="--d: 0ms">{project.name}</span>
+                <span class="work__year work__reveal" style="--d: 60ms">{project.year ?? ''}</span>
+                <span class="work__kind work__reveal" style="--d: 120ms">{project.kind}</span>
+                <span class="work__description work__reveal" style="--d: 180ms">{project.description}</span>
+                <span class="work__meta work__reveal" style="--d: 240ms">
+                  <span class="work__meta-text">View project</span>
+                  <span class="work__meta-arrow" aria-hidden="true">↗</span>
+                </span>
+                <span class="work__mobile-preview">
+                  <img
+                    src={project.preview}
+                    alt={project.alt}
+                    width={project.width}
+                    height={project.height}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="work__mobile-caption">{project.caption}</span>
+                </span>
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+            ) : (
+              <div
+                class="work__row work__row--private"
+                data-preview={project.preview}
+                data-caption={project.caption}
+                data-ratio={`${project.width} / ${project.height}`}
+              >
+                <span class="work__name work__reveal" style="--d: 0ms">{project.name}</span>
+                <span class="work__year work__reveal" style="--d: 60ms">{project.year ?? ''}</span>
+                <span class="work__kind work__reveal" style="--d: 120ms">{project.kind}</span>
+                <span class="work__description work__reveal" style="--d: 180ms">{project.description}</span>
+                <span class="work__meta work__meta--private work__reveal" style="--d: 240ms">
+                  <span class="work__meta-text">Private project ·</span>
+                  <a class="work__meta-request" href="#contact">available on request</a>
+                </span>
+                <span class="work__mobile-preview">
+                  <img
+                    src={project.preview}
+                    alt={project.alt}
+                    width={project.width}
+                    height={project.height}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="work__mobile-caption">{project.caption}</span>
+                </span>
+              </div>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+
+    <figure class="work__preview">
+      <div class="work__preview-frame">
+        <img
+          class="work__preview-image"
+          src={projects[0].preview}
+          alt=""
+          width={projects[0].width}
+          height={projects[0].height}
+        />
+      </div>
+      <figcaption class="work__preview-caption">{projects[0].caption}</figcaption>
+
+      <ul class="work__plates">
+        {
+          projects.map((project, index) => (
+            <li class={`work__plate${index === 0 ? ' is-active' : ''}`}>
+              <button
+                class="work__plate-button"
+                type="button"
+                data-preview={project.preview}
+                data-caption={project.caption}
+                data-alt={project.alt}
+                aria-label={`Show ${project.name} preview`}
+              >
+                <span class="work__plate-name">{project.name}</span>
+                <span class="work__plate-kind">{project.kind}</span>
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+    </figure>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const root = document.querySelector<HTMLElement>('.work');
+    if (!root) return;
+
+    const frame = root.querySelector<HTMLElement>('.work__preview');
+    const image = root.querySelector<HTMLImageElement>('.work__preview-image');
+    const caption = root.querySelector<HTMLElement>('.work__preview-caption');
+    const rows = Array.from(root.querySelectorAll<HTMLElement>('.work__row'));
+    if (!frame || !image || !caption) return;
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+    let warmed = false;
+
+    // Entrance: each ledger row resolves as it enters the viewport.
+    const reveals = Array.from(root.querySelectorAll<HTMLElement>('.work__reveal'));
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.2, rootMargin: '0px 0px -8% 0px' },
+      );
+      reveals.forEach((item) => observer.observe(item));
+    } else {
+      reveals.forEach((item) => item.classList.add('is-visible'));
+    }
+
+    const show = (row: HTMLElement) => {
+      if (!fine.matches) return;
+      if (!warmed) {
+        warmed = true;
+        rows.forEach((item) => {
+          const src = item.dataset.preview;
+          if (src) new Image().src = src;
+        });
+      }
+      image.src = row.dataset.preview ?? '';
+      image.alt = '';
+      caption.textContent = row.dataset.caption ?? '';
+
+      root.querySelectorAll<HTMLElement>('.work__plate').forEach((plate) => {
+        plate.classList.toggle(
+          'is-active',
+          plate.querySelector('button')?.dataset.preview === row.dataset.preview,
+        );
+      });
+
+      const ledger = root.querySelector<HTMLElement>('.work__ledger');
+      if (!ledger) return;
+      const y = row.offsetTop + row.offsetHeight / 2 - frame.offsetHeight / 2;
+      const max = Math.max(0, ledger.offsetHeight - frame.offsetHeight);
+      frame.style.transform = `translateY(${Math.min(max, Math.max(0, y))}px)`;
+      frame.classList.add('is-open');
+    };
+
+    const hide = () => frame.classList.remove('is-open');
+
+    rows.forEach((row) => {
+      row.addEventListener('pointerenter', () => show(row));
+      row.addEventListener('focusin', () => show(row));
+    });
+
+    // On desktop the preview follows the row being read, so it never shows a
+    // project that is nowhere near the pointer, the focus ring, or the
+    // viewport centre.
+    if (fine.matches && 'IntersectionObserver' in window) {
+      const visible = new Map<HTMLElement, number>();
+      const reader = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) visible.set(entry.target as HTMLElement, entry.intersectionRatio);
+            else visible.delete(entry.target as HTMLElement);
+          });
+          let best: HTMLElement | null = null;
+          let bestRatio = 0;
+          visible.forEach((ratio, row) => {
+            if (ratio > bestRatio) {
+              best = row;
+              bestRatio = ratio;
+            }
+          });
+          if (best) show(best);
+        },
+        { threshold: [0, 0.25, 0.5, 0.75, 1], rootMargin: '-35% 0px -35% 0px' },
+      );
+      rows.forEach((row) => reader.observe(row));
+    }
+
+    // The plate strip doubles as a selector: choose a preview with pointer,
+    // keyboard, or touch.
+    root.querySelectorAll<HTMLButtonElement>('.work__plate-button').forEach((button) => {
+      const activate = () => {
+        const target = rows.find((row) => row.dataset.preview === button.dataset.preview);
+        if (!target) return;
+        show(target);
+        // A public row is a link and can take focus; a private row is a
+        // static block, so focus stays on the button that was pressed.
+        if (target instanceof HTMLAnchorElement) target.focus({ preventScroll: true });
+      };
+      button.addEventListener('click', activate);
+    });
+    root.addEventListener('pointerleave', hide);
+    root.addEventListener('focusout', (event) => {
+      if (!root.contains(event.relatedTarget as Node | null)) hide();
+    });
+
+    // Desktop: the ledger opens with the first project's preview in place.
+    if (fine.matches && rows[0]) show(rows[0]);
+  })();
+</script>

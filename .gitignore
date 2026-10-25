@@ -1,0 +1,45 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# logs and local env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+.env.production
+
+# editor and OS
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# taste-skill working files
+# Generated screenshots, stitched inspector sheets and inspection reports are
+# review-process artifacts and are never committed. The capture scripts and
+# LOCAL_MODIFICATIONS.md under .taste-skill/ are kept.
+.taste-skill/inspect/
+.taste-skill/inspect-*/
+.taste-skill/real-shots/
+.taste-skill/real-shots-*/
+.taste-skill/review-shots/
+.taste-skill/*-shots/
+.taste-skill/**/*.jpg
+.taste-skill/**/*.jpeg
+.taste-skill/**/*.png
+.taste-skill/**/*.webp
+.taste-skill/**/shots.json
+.taste-skill/**/report.json
+.taste-skill/**/*.log
+
+# local scratch
+*.tmp
+*.bak
+*.orig
+.cache/
+

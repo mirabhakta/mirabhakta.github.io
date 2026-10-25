@@ -1,0 +1,86 @@
+@import 'tailwindcss';
+@import './tokens.css';
+@import './phase2a.css';
+@import './work.css';
+@import './sections.css';
+
+/* Base layer: page ground, ink, focus ring, reduced-motion fallbacks.
+   Nothing here is a component; components live in src/components. */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* the header is fixed; anchored sections clear it */
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--color-ground);
+    color: var(--color-ink);
+    font-family: var(--font-text);
+    font-size: var(--text-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 0.9;
+  }
+
+  /* Focus ring: 2px solid rose at 2px offset, per the direction sheet.
+     Visible on both ivory and charcoal grounds. */
+  :focus-visible {
+    outline: 2px solid var(--color-rose);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-light);
+    color: var(--color-ink);
+  }
+}
+
+@layer utilities {
+  .page-gutter {
+    padding-inline: var(--spacing-page);
+  }
+
+  /* the page's one anchor line, reused by every section */
+  .anchor {
+    max-width: 62ch;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
+/* Every move keeps its content and drops its travel. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+  }
+}

@@ -1,0 +1,40 @@
+---
+// Soft Monument — base layout.
+// Fonts load from Fontshare (verified HTTP 200 in the design phase).
+// No analytics, no runtime dependencies, no paid services.
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=gambarino@400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500&display=swap"
+      rel="stylesheet"
+    />
+
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

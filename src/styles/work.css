@@ -1,0 +1,348 @@
+/* Phase 2B.1 — Selected Work: quiet ledger with side preview.
+   Blueprint: work-quiet-ledger-preview from soft-monument-direction.json.
+   No thin rules, no generic cards, no gradients. */
+
+@layer components {
+  .work {
+    position: relative;
+    padding-top: var(--spacing-section);
+    padding-bottom: var(--spacing-section);
+    scroll-margin-top: 6rem;
+  }
+
+  .work__head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 30rem);
+    align-items: end;
+    gap: clamp(1.5rem, 5vw, 5rem);
+    margin-bottom: clamp(3rem, 7vw, 6rem);
+  }
+
+  .work__title {
+    margin: 0;
+    font-size: var(--text-heading);
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+  }
+
+  .work__intro {
+    max-width: 42ch;
+    margin: 0;
+    color: var(--color-ink-soft);
+    font-size: var(--text-body);
+    line-height: 1.55;
+  }
+
+  /* Horizontal ledger register on phone; hidden on desktop where the marks
+     live beside each row. */
+  .work__register { display: none; }
+
+  .work__ledger {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 32rem) minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: start;
+  }
+
+  .work__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Rows are separated by space, not hairlines (house rule). */
+  .work__item { padding: 1.75rem 0; }
+  .work__item:first-child { padding-top: 0; }
+
+  /* Entrance: a ledger entry resolves as it enters view. */
+  .work__reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 520ms var(--ease-out), transform 520ms var(--ease-out);
+    transition-delay: var(--d, 0ms);
+  }
+
+  .work__reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Without scripting there is no observer to reveal the rows, so show
+     them outright rather than leaving the section blank. */
+  @media (scripting: none) {
+    .work__reveal {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .work__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'name year'
+      'kind kind'
+      'desc desc'
+      'preview preview'
+      'meta meta';
+    align-items: baseline;
+    gap: 0.35rem 1.5rem;
+    min-height: 44px;
+    padding: 1.4rem 0;
+    color: inherit;
+    text-decoration: none;
+    transition: opacity var(--t-hover) ease, color var(--t-hover) ease;
+  }
+
+  .work__name {
+    grid-area: name;
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.125rem);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .work__year {
+    grid-area: year;
+    color: var(--color-muted);
+    font-size: var(--text-small);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .work__kind {
+    grid-area: kind;
+    color: var(--color-muted);
+    font-size: var(--text-small);
+  }
+
+  .work__description {
+    grid-area: desc;
+    max-width: 46ch;
+    margin-top: 0.35rem;
+    color: var(--color-ink-soft);
+    font-size: var(--text-body);
+    line-height: 1.55;
+  }
+
+  .work__meta {
+    grid-area: meta;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.85rem;
+    color: var(--color-ink);
+    font-size: var(--text-small);
+    font-weight: 500;
+  }
+
+  .work__meta-arrow {
+    color: var(--color-accent);
+    transition: transform var(--t-press) var(--ease-out);
+  }
+
+  /* A private project is presented as a row without a link. It keeps the
+     same ledger geometry, and its status line reads as a quiet note rather
+     than an action. */
+  .work__row--private { cursor: default; }
+
+  .work__meta--private {
+    color: var(--color-muted);
+    font-weight: 400;
+  }
+
+  /* The request line is a real link, so it reads as an action rather than as
+     a status note that promises something the page does not offer. */
+  .work__meta-request {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+  }
+
+  .work__mobile-preview { display: none; }
+  .work__mobile-caption { display: none; }
+
+  .work__preview {
+    position: sticky;
+    top: 18vh;
+    justify-self: end;
+    width: min(100%, 40rem);
+    margin: 0;
+  }
+
+  /* The frame keeps a stable height so swapping previews never shifts the
+     layout. Screenshots are shown whole (contain), never cropped. */
+  .work__preview-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: clip;
+    background: transparent;
+    aspect-ratio: 16 / 10;
+    transition: opacity 240ms ease;
+  }
+
+  .work__preview-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .work__preview-caption {
+    margin-top: 0.9rem;
+    color: var(--color-ink-soft);
+    font-size: var(--text-small);
+  }
+
+  /* Quiet plate strip: a contact sheet of the four project interfaces. Each
+     plate is also a selector, so the preview can be chosen without a
+     pointer. */
+  /* A quiet text index instead of miniature screenshots, which would be too
+     small to read and would only add noise beside the large preview. */
+  .work__plates {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.9rem;
+    margin: 1.6rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .work__plate-button {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'name'
+      'kind';
+    align-items: center;
+    width: 100%;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--color-muted);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: color var(--t-hover) ease, opacity var(--t-hover) ease;
+    opacity: 0.6;
+  }
+
+  .work__plate-name {
+    grid-area: name;
+    font-size: var(--text-small);
+    color: inherit;
+  }
+
+  .work__plate-kind {
+    grid-area: kind;
+    font-size: var(--text-small);
+    color: var(--color-muted);
+  }
+
+  .work__plate.is-active .work__plate-button {
+    color: var(--color-ink);
+    opacity: 1;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .work__ledger:has(.work__row:not(.work__row--private):hover) .work__row:not(:hover),
+  .work__ledger:has(.work__row:not(.work__row--private):focus-visible) .work__row:not(:focus-visible) {
+    opacity: 0.45;
+  }
+
+  .work__row:hover .work__meta-arrow,
+  .work__row:focus-visible .work__meta-arrow {
+    transform: translate(2px, -2px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .work__head { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .work__ledger { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .work__preview { display: none; }
+  .work__register { display: block; margin-bottom: 1.5rem; }
+
+  /* Tablet keeps the same per-row screenshots as the phone, shown whole at
+     a size where the interface is still readable. */
+  .work__mobile-preview {
+    grid-area: preview;
+    display: block;
+    margin-top: 1.25rem;
+  }
+
+  .work__mobile-preview img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    background: var(--color-surface);
+  }
+
+  .work__mobile-caption {
+    display: block;
+    margin-top: 0.6rem;
+    color: var(--color-muted);
+    font-size: var(--text-small);
+  }
+  .work__register-svg { display: block; width: 100%; max-width: 22rem; height: auto; overflow: visible; }
+  .work__register-base {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1.25;
+    opacity: 0.25;
+    vector-effect: non-scaling-stroke;
+  }
+  .work__register-mark {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1.25;
+    stroke-linecap: round;
+    opacity: 0.8;
+    vector-effect: non-scaling-stroke;
+  }
+}
+
+@media (max-width: 640px) {
+  .work__head { margin-bottom: 2.5rem; }
+
+  .work__row {
+    grid-template-areas:
+      'name year'
+      'kind kind'
+      'desc desc'
+      'preview preview'
+      'meta meta';
+    padding: 1rem 0 1.25rem;
+  }
+
+  .work__name { font-size: 1.75rem; }
+
+  .work__year { grid-area: year; }
+
+  .work__mobile-preview {
+    grid-area: preview;
+    display: block;
+    margin-top: 1.1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work__preview-frame {
+    clip-path: inset(0);
+    opacity: 1;
+    transition: none;
+  }
+
+  .work__preview-image { transform: none; }
+
+  .work__reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

@@ -1,0 +1,68 @@
+/* Soft Monument — design tokens.
+   Source of record: portfolio-design/soft-monument-direction.json
+   Every value here is taken from that file. Do not add tokens that are not in it. */
+
+@theme {
+  /* ---- palette: ivory, charcoal and lilac ---- */
+  --color-ground: #f2f1ee;
+  --color-surface: #e8e6e1;
+  --color-raised: #fbfaf8;
+  --color-ink: #17171a;
+  --color-ink-soft: #3a3a42;
+  --color-muted: #5a5a62;
+  --color-accent: #6b6688;
+  --color-accent-strong: #5f5a7a;
+  --color-accent-light: #a7a2be;
+  --color-accent-ink: #ffffff;
+  --color-rose: #c9a0a0;
+  --color-charcoal: #17171a;
+  --color-on-charcoal: #f2f1ee;
+  --color-on-charcoal-muted: #a7a2be;
+
+  /* ---- typography ---- */
+  --font-display: 'Gambarino', Georgia, 'Times New Roman', serif;
+  --font-text: 'General Sans', system-ui, -apple-system, sans-serif;
+
+  /* five steps is the ceiling; no body-family size above 32px */
+  --text-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --text-body: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --text-lead: clamp(1.375rem, 1.15rem + 1vw, 2rem);
+  --text-heading: clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem);
+  --text-monument: clamp(104px, 15vw, 228px);
+
+  /* ---- layout ---- */
+  --spacing-page: 40px;
+  --spacing-section: 180px;
+
+  /* one radius: 2px on controls, 0 elsewhere */
+  --radius-control: 2px;
+
+  /* ---- motion (tokens from references/motion.md) ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  --t-press: 140ms;
+  --t-hover: 180ms;
+  --t-ui: 240ms;
+  --t-reveal: 800ms;
+  --t-open: 1200ms;
+  --stagger-line: 90ms;
+  --stagger-item: 70ms;
+}
+
+/* Phone overrides named in the direction sheet. */
+@media (max-width: 640px) {
+  :root {
+    --spacing-page: 16px;
+    --spacing-section: 100px;
+    --text-monument: clamp(76px, 21vw, 116px);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  :root {
+    --spacing-page: 32px;
+    --spacing-section: 140px;
+  }
+}

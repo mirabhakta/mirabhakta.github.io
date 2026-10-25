@@ -1,0 +1,246 @@
+{
+  "version": 1,
+  "at": "2026-10-24T00:00:00.000Z",
+  "kind": "page",
+  "direction": {
+    "id": "soft-monument",
+    "name": "Soft Monument",
+    "status": "approved by client 2026-10-24; not yet built",
+    "derivedFrom": {
+      "name-as-monument": {
+        "seed": 2116666457,
+        "source": "C:/Users/miraa/portfolio-design/.taste-skill/direction.json",
+        "taken": ["the idea (the name as architecture)", "General Sans as the text face", "the type scale and 5-size discipline", "the loose-scatter work composition", "the masked-headline signature move"],
+        "left": ["black and crimson palette", "ring-of-frames hero (needs 18-24 photographs that do not exist)", "portrait-as-drop-cap about (needs a portrait)"]
+      },
+      "type-only-statement": {
+        "seed": 208325891,
+        "source": "previous session transcript only - this sheet was overwritten in direction.json and was never saved to its own file",
+        "taken": ["the stacked-name hero geometry", "pale block with dark type for the primary button", "the rule that the first screen carries no image"]
+      },
+      "split-stage": {
+        "seed": 1432415351,
+        "source": "C:/Users/miraa/portfolio-design/.taste-skill/direction-quiet.md",
+        "taken": ["the quiet ledger for Selected Work (work-quiet-ledger-preview) and its side-preview interaction"],
+        "left": ["bone/green/chocolate palette", "STIX Two Text", "sticky-photograph half-screen stage (needs a photograph)"]
+      }
+    }
+  },
+  "redraws": [
+    {
+      "slot": "palette",
+      "from": "black and crimson (#0a0a0a / #b11226)",
+      "to": "ivory and charcoal with muted lilac",
+      "reason": "Client decision: mature ivory/charcoal foundation with restrained lilac; crimson reads studio-aggressive and does not carry the refined, subtly feminine identity asked for."
+    },
+    {
+      "slot": "type.display",
+      "from": "General Sans 700 at 10vw+",
+      "to": "Gambarino 400 at 15vw / 21vw",
+      "reason": "A pure-grotesk monument is the category default for AI and engineering sites. A sharp display serif over the same General Sans text face keeps the monument but stops it reading as another generated tech portfolio, and adds the editorial, slightly feminine register without decoration."
+    },
+    {
+      "slot": "hero",
+      "from": "ring of frames around the headline",
+      "to": "stacked name, two inks",
+      "reason": "The ring needs 18-24 real project photographs. None exist. The skill forbids planning around pictures you do not have."
+    },
+    {
+      "slot": "section:work",
+      "from": "loose scatter with pauses",
+      "to": "work-quiet-ledger-preview (quiet ledger, side preview)",
+      "reason": "The scatter needs five to eight full-bleed project photographs. The ledger scales from three projects to twenty, needs one image per project, and is keyboard- and touch-operable."
+    }
+  ],
+  "input": {
+    "brief": "Mira Bhakta - AI/software builder, researcher and creative technologist. Mature, professional, modern, sleek, subtly feminine. Audiences: engineering recruiters, researchers, startup founders, collaborators.",
+    "sector": "personal-portfolio",
+    "keep": [],
+    "tone": "editorial"
+  },
+  "ideaSentence": "On this page, the gap between what a person has built and what an AI system believes about them becomes a measured column of accumulated margin - the page's one drawing, and the visual argument for the work it lists.",
+  "liveThing": {
+    "name": "the ledger rule",
+    "what": "The Selected Work section draws one glyph per shipped project in the page margin. It accumulates as the visitor scrolls and again as they open projects; hovering or focusing a ledger row pulls that project's mark into view.",
+    "proves": "That a context layer should be legible, bounded and inspectable rather than a black box - the claim ContextOS makes.",
+    "phone": "becomes a horizontal register at the top of Selected Work, left marks clearing as right marks fill",
+    "fallback": "without JS it is a static column of marks, each with its project name in a title element; the ledger list stays fully readable and every link still works",
+    "rules": ["no canvas", "no particles", "no nodes or edges", "no scroll hijacking", "must not block reading"]
+  },
+  "type": {
+    "display": {
+      "family": "Gambarino",
+      "source": "fontshare",
+      "weights": [400],
+      "settings": "weight 400 (single cut) - tracking -0.02em - leading 0.9 - sentence case",
+      "css": "https://api.fontshare.com/v2/css?f[]=gambarino@400&display=swap",
+      "verified": "HTTP 200, woff2 served from cdn.fontshare.com"
+    },
+    "text": {
+      "family": "General Sans",
+      "source": "fontshare",
+      "weights": [400, 500],
+      "settings": "400 for body, navigation and buttons; 500 for emphasis - leading 1.5",
+      "css": "https://api.fontshare.com/v2/css?f[]=general-sans@400,500&display=swap",
+      "verified": "HTTP 200"
+    },
+    "scale": {
+      "note": "five steps is the ceiling; no size in the body family above 32px, so no display size is rendered in the text face",
+      "small": "clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem)",
+      "body": "clamp(1rem, 0.97rem + 0.15vw, 1.0625rem)",
+      "lead": "clamp(1.375rem, 1.15rem + 1vw, 2rem)",
+      "heading": "clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem)",
+      "monument": "clamp(104px, 15vw, 228px) desktop / clamp(76px, 21vw, 116px) phone"
+    },
+    "fixedSpecs": {
+      "workRow": 16,
+      "aboutSideFacts": 13,
+      "smallPrint": 13,
+      "rationale": "the inspector fails more than three text blocks under 13px; blueprints that ask for 13-14px are mapped to 13, never lower"
+    }
+  },
+  "palette": {
+    "name": "Ivory, charcoal and lilac",
+    "tokens": {
+      "ground": "#F2F1EE",
+      "surface": "#E8E6E1",
+      "raised": "#FBFAF8",
+      "ink": "#17171A",
+      "inkSoft": "#3A3A42",
+      "muted": "#5A5A62",
+      "accent": "#6B6688",
+      "accentStrong": "#5F5A7A",
+      "accentLight": "#A7A2BE",
+      "accentInk": "#FFFFFF",
+      "rose": "#C9A0A0",
+      "roseInk": "#17171A",
+      "charcoal": "#17171A",
+      "onCharcoalInk": "#F2F1EE",
+      "onCharcoalMuted": "#A7A2BE"
+    },
+    "proportions": "ivory ground about 80% of the page; charcoal one band (About) and the footer, about 20%; lilac on the primary action, the ledger rule, links, the current ledger row and the active nav item - under 2% of the page; rose only as the focus ring and one small area, never a field",
+    "rules": [
+      "the accent never fills a section",
+      "the ground stays ivory; lilac is never the page background",
+      "no gradients anywhere, including on the button",
+      "one radius: 2px on buttons and inputs, 0 everywhere else"
+    ],
+    "verified": {
+      "inspectorColourFamily": "all tokens pass rules.mjs colourFamily: no cream, no terracotta, no ai-purple. The ground sits at s=0.133, under the 0.16 cream threshold; the accent sits at s=0.143, under the 0.42 violet threshold.",
+      "contrast": {
+        "ink on ground": "15.84:1",
+        "muted on ground": "6.05:1",
+        "accentStrong on ground": "5.76:1",
+        "accent on ground": "4.79:1",
+        "accentLight on charcoal": "7.29:1",
+        "ink on rose": "7.68:1",
+        "white on accent": "5.41:1",
+        "surface vs ground": "1.10:1 - a tone step, not a line"
+      }
+    }
+  },
+  "hero": {
+    "archetype": "stacked-name-two-inks",
+    "geometry": "ivory field, no image. Name on two lines at clamp(104px,15vw,228px), Gambarino 400, tracking -0.02em, leading 0.9, flush left on the 40px page margin, block starting about 15% down. Line one 'Mira' in ink, line two 'Bhakta' in accent. Supporting sentence 20px, max 46ch, below the name with 32px of space. One primary action as a real button, 48px tall, accent fill, white label. Top edge: wordmark 'MB' top-left at 15px/500; four links plus the action top-right at 15px.",
+    "titleRule": "the h1 is the two lines of the name; the sentence under it (20px) says what this is, so the first screen is never a bare name",
+    "mobile": "field fills 100svh, name at clamp(76px,21vw,116px) starting 18% down, 16px margins; sentence moves under the name at 17px full width; the action follows at 48px; top-right links reduce to one menu word",
+    "measured": "8.6vw passes the inspector focal-point floor of 4.5vw with no hero picture"
+  },
+  "sections": [
+    {
+      "role": "work",
+      "id": "work-quiet-ledger-preview",
+      "name": "Quiet ledger, side preview",
+      "heading": "Selected Work",
+      "content": "ContextOS, LedgerGuard, Kandor, then a quiet final row: 'Academic research - equity crowdfunding, AI and language - in progress' linking to /research",
+      "desktop": "ledger column 560px wide with its left edge at 22% of the viewport. Rows 44px tall: name 16px in full ink at the left; kind of work 16px in muted at 55% of the column; year right-aligned, tabular figures. No rules between rows. Hover or focus a row: that row stays full ink, the others drop to muted, and the project's image appears in the empty area right of the column - 4:3, 300px wide, absolutely positioned, top aligned to the hovered row, 64px from the column's right edge, 150ms fade.",
+      "mobile": "column full width with 20px margins; rows 52px tall with the name left and the year right, kind of work on a second line at 13px. No hover preview: the first three projects each show a 16:10 image at full column width above their row."
+    },
+    {
+      "role": "about",
+      "id": "about-side-facts-wide-paragraph",
+      "name": "Side facts, wide paragraph",
+      "heading": "About",
+      "content": "row one - label/value pairs: Based in / Pomona, California; Studying / Computer Science, Economics minor, Cal Poly Pomona; Working on / AI context and agent safety. From the 34% line a five-line paragraph at clamp(20px,1.7vw,26px), leading 1.35, running to 90% of the width. Row two - 'Currently' plus a two-column record list of the four work areas.",
+      "note": "the blueprint's 13px is kept only for the label/value pairs, which is a real small size; the heading is explicit because the inspector warns on sections with running text and no heading"
+    },
+    {
+      "role": "list",
+      "id": "list-one-item-per-poster-line",
+      "name": "One item per poster line",
+      "heading": "Interests",
+      "content": "Artificial intelligence and agents / Human-centered technology / Applied research / Entrepreneurship / Creative technology and music",
+      "desktop": "one item per line at clamp(64px,10vw,150px) in the display face, leading 0.92, flush left on a 20px margin; each item's one detail (a phrase, not a date) at the right margin on the same baseline at 16px. Hovering an item swaps its ink for the accent.",
+      "mobile": "items at 15vw, one per line, flush left with 16px margins; each detail moves beneath its item at 13px"
+    },
+    {
+      "role": "contact",
+      "id": "contact-address-in-display-rows",
+      "name": "Address in display rows",
+      "heading": "Contact",
+      "content": "GitHub, LinkedIn, resume, email",
+      "desktop": "a stack of four full-width rows at clamp(44px,6vw,88px) in the display face, regular weight, left-aligned with a 20px inset, leading 1.0, rows about 150px tall with the text in the lower third, told apart by 28px of space alone. Each row is a real link. A fifth row holds 'Say hello' at the same size followed 24px to its right by a solid round accent button 0.9em across with an arrow, which opens the email.",
+      "mobile": "rows at 9.6vw with 16px insets, about 84px tall; the greeting row becomes a full-width accent band with the round arrow button at its right end, 56px across"
+    }
+  ],
+  "artisticElement": {
+    "name": "The ledger rule",
+    "concept": "One mark per shipped project, drawn in the page margin, accumulating as the visitor scrolls and again as they open projects. Each mark is the project's own initial, rendered as a glyph from a small set of drawn skeletons - never a node graph, never a particle field, never a neural-network illustration.",
+    "reference": "an accountant's tally and a seismograph trace - two traditions of recording, both legible, both bounded",
+    "construction": "inline SVG, stroke-width 1.25, round caps, drawn from a fixed glyph table; two layers - a dim base layer always visible and a lilac overlay layer whose stroke-dashoffset is driven by scroll progress. No canvas, no animation loop, no particles.",
+    "behaviour": {
+      "onScroll": "each mark fills as its project's row passes; the column accumulates top to bottom",
+      "onHoverOrFocus": "that project's mark pulls out to 8px to the right and rises to full ink",
+      "onOpen": "one additional segment is appended to the open project's mark, permanently for the session",
+      "reducedMotion": "the base layer shows all marks at once with no travel and no dash animation"
+    },
+    "verification": "built and inspected as a standalone file at 1440px: the SVG produced no hairline finding. The inspector only counts thin rules made from CSS borders, 1-1.5px background elements and gradients - stroked SVG paths are not counted. This was tested, not assumed.",
+    "placement": "the right page margin beside Selected Work on desktop; a horizontal register above the Selected Work list on mobile"
+  },
+  "interaction": {
+    "ledger": {
+      "pointer": "hover a row - row to full ink, siblings to muted, preview image fades in over 150ms",
+      "keyboard": "rows are real links; focus produces the same state as hover; focus ring is 2px solid rose #C9A0A0 at 2px offset, visible on both ivory and charcoal",
+      "touch": "no hover dependency: each project image is rendered inline above its row at phone width, so a tap on the row follows the link and the image is already visible",
+      "tapTarget": "44px minimum row height on desktop, 52px on phone"
+    },
+    "motion": {
+      "signature": "masked headline - each line rises from behind its own baseline, about 900ms strong ease-out, line two 110ms after line one; the supporting sentence and the button fade up together",
+      "sections": "heading, then text, then picture or figure, staggered 60-90ms, rising 16-32px with opacity, triggered once as the section enters",
+      "feedback": "press, hover and focus on every button, link, ledger row and contact row",
+      "movingPicture": "one slow drift on the Selected Work preview image",
+      "floor": "the inspector fails a page under eight moving elements; budget for twelve to sixteen",
+      "transformAndOpacityOnly": true,
+      "reducedMotion": "every move keeps its content and drops its travel; nothing is hidden if the script fails"
+    }
+  },
+  "responsive": {
+    "breakpoints": ["phone 390px", "tablet 768px", "desktop 1440px"],
+    "margins": "40px desktop, 32px tablet, 16px phone; equal on both sides at every width",
+    "sectionGap": "120-240px desktop, 80-120px phone",
+    "rules": [
+      "the phone layout is its own composition, not a squeeze of the desktop one",
+      "the ledger preview is a hover affordance on desktop only; on phone each project carries its image inline",
+      "the ledger rule becomes horizontal on phone",
+      "the monument name stays two lines at every width"
+    ]
+  },
+  "knownGaps": [
+    "the three portfolio projects have no real screenshots yet - ContextOS, LedgerGuard and Kandor each need one 4:3 image before the ledger preview can show anything real",
+    "the research row is a placeholder pending verified title, venue and date; no research claim may be published until confirmed",
+    "the inspector warns when a page carries no video; no honest clip exists yet, so the warning will be defended rather than filled",
+    "few-pictures is a FAIL the page cannot pass without the project screenshots and at least one real picture of the subject's world"
+  ],
+  "buildNote": "inspect.mjs reads .taste-skill/direction.json from the project root and takes dealtFonts from type.display.family and type.text.family. This file must be copied to <astro-root>/.taste-skill/direction.json at build time or the inspector will warn font-not-dealt.",
+  "sources": {
+    "skillRoot": "C:/Users/miraa/AppData/Local/hermes/skills/creative/design-taste-frontend",
+    "verifiedFact": [
+      "github.com/mirabhakta/contextos - local-first context layer, MVP in development, Electron/React/TypeScript",
+      "github.com/mirabhakta/LedgerGuard - financial firewall for autonomous agents, built for the Intuit QuickBooks challenge at LA Hacks 2026, prototype simulates all execution",
+      "github.com/mirabhakta/hacktech-26-kandor - Chrome extension detecting grooming and manipulation in real time, built at Hacktech 2026",
+      "C:/Users/miraa/Documents/crowdcube_scraper + final_handoff_note.md - REU equity crowdfunding campaign data enrichment, 125 campaigns processed",
+      "github.com/mirabhakta/mirabhakta.github.io - existing Pages site: CNAME mirabhakta.me, single index.html"
+    ],
+    "leftUnpublished": "no metrics, awards, employers, dates or research titles are stated anywhere in this direction; none could be verified"
+  }
+}
