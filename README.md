@@ -1,42 +1,24 @@
 # Mira Bhakta
 
-**Personal portfolio — [mirabhakta.me](https://mirabhakta.me)**
+My personal website: **[mirabhakta.me](https://mirabhakta.me)**
 
-A space for the things I build, research, and explore.
+I'm a Computer Science student at Cal Poly Pomona, minoring in Economics. I spend a lot of my time working on AI, software projects, and research.
 
-I'm a Computer Science student at Cal Poly Pomona, minoring in Economics. My work spans artificial intelligence, software engineering, research, and creative technology.
+I made this site to have one place for my work, experience, and whatever I'm currently building.
 
-This portfolio brings together selected projects, professional experience, and the ideas I'm currently exploring.
+## The website
 
-## About the site
+The design is called **Soft Monument**. I wanted something modern and minimal, but still a little creative and personal.
 
-Designed around **Soft Monument**, a visual direction that combines editorial typography, minimalism, and subtle futuristic details.
+It's built with Astro, TypeScript, and Tailwind CSS, and hosted on GitHub Pages.
 
-The design emphasizes thoughtful composition, expressive typography, and a restrained ivory, charcoal, and lilac palette.
-
-Built to feel personal and creative while remaining clean, accessible, and professional.
-
-## Built with
-
-- **Astro** — Static site framework
-- **TypeScript** — Development
-- **Tailwind CSS** — Styling
-- **GitHub Pages** — Hosting
-- **GitHub Actions** — Automated deployment
-
-The site is responsive, keyboard-accessible, and supports reduced-motion preferences.
-
-## Development
-
-To run the website locally:
+## Running locally
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Changes pushed to `main` are automatically built and deployed through GitHub Actions.
+## Links
 
-## Connect
-
-[Website](https://mirabhakta.me) · [GitHub](https://github.com/mirabhakta) · [LinkedIn](https://www.linkedin.com/in/mirabhakta) · [Email](mailto:miraabhakta@gmail.com)
+[Website](https://mirabhakta.me) · [LinkedIn](https://www.linkedin.com/in/mirabhakta) · [Email](mailto:miraabhakta@gmail.com)
