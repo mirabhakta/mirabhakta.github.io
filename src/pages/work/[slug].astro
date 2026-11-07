@@ -17,6 +17,7 @@ const { project } = Astro.props;
       <p class="eyebrow">{project.kind}</p><h1>{project.name}</h1>
       <p class="detail__lead">{project.summary}</p><p class="detail__status">{project.status}</p>
       <div class="detail__actions">
+        {project.liveHref && <a class="btn-primary" href={project.liveHref} target="_blank" rel="noopener noreferrer">Open live dashboard <span aria-hidden="true">↗</span><span class="sr-only">(opens in a new tab)</span></a>}
         {project.href && <a class="btn-primary" href={project.href} target="_blank" rel="noopener noreferrer">View code on GitHub <span aria-hidden="true">↗</span><span class="sr-only">(opens in a new tab)</span></a>}
         {!project.href && <a class="btn-primary" href={`mailto:miraabhakta@gmail.com?subject=${encodeURIComponent(project.name + ' — project inquiry')}`}>Ask about {project.name} <span aria-hidden="true">↗</span></a>}
       </div>
