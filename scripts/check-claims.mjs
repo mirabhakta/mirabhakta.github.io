@@ -8,7 +8,8 @@
 //   C:/Users/miraa/Documents/crowdcube_scraper/FINAL_COMPLETION_REPORT.md
 //
 // Run: node scripts/check-claims.mjs [python-with-pypdf]
-// An optional Python path enables PDF extraction without system pdftotext.
+// Passing an argument enables PDF extraction with the fixed python3 executable
+// when system pdftotext is unavailable.
 import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 
@@ -45,9 +46,8 @@ const AUDIT = 'C:/Users/miraa/Documents/crowdcube_scraper/FINAL_COMPLETION_REPOR
 const SITE = 'C:/Users/miraa/mirabhakta.github.io/src';
 
 const pdftotext = (file) => {
-  const python = process.argv[2];
-  const text = python
-    ? execFileSync(python, ['-X', 'utf8', '-c', 'import sys; from pypdf import PdfReader; print("\\n".join(p.extract_text() for p in PdfReader(sys.argv[1]).pages))', file], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 })
+  const text = process.argv[2]
+    ? execFileSync('python3', ['-X', 'utf8', '-c', 'import sys; from pypdf import PdfReader; print("\\n".join(p.extract_text() for p in PdfReader(sys.argv[1]).pages))', file], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 })
     : execFileSync('pdftotext', ['-layout', file, '-'], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
   return text.normalize('NFKC').replace(/Ɵ/g, 'ti');
 };
