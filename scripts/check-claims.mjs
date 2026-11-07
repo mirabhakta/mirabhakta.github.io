@@ -8,8 +8,7 @@
 //   C:/Users/miraa/Documents/crowdcube_scraper/FINAL_COMPLETION_REPORT.md
 //
 // Run: node scripts/check-claims.mjs [python-with-pypdf]
-// Passing an argument enables PDF extraction with the fixed python3 executable
-// when system pdftotext is unavailable.
+// An optional Python path enables PDF extraction without system pdftotext.
 import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 
@@ -46,8 +45,9 @@ const AUDIT = 'C:/Users/miraa/Documents/crowdcube_scraper/FINAL_COMPLETION_REPOR
 const SITE = 'C:/Users/miraa/mirabhakta.github.io/src';
 
 const pdftotext = (file) => {
-  const text = process.argv[2]
-    ? execFileSync('python3', ['-X', 'utf8', '-c', 'import sys; from pypdf import PdfReader; print("\\n".join(p.extract_text() for p in PdfReader(sys.argv[1]).pages))', file], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 })
+  const python = process.argv[2];
+  const text = python
+    ? execFileSync(python, ['-X', 'utf8', '-c', 'import sys; from pypdf import PdfReader; print("\\n".join(p.extract_text() for p in PdfReader(sys.argv[1]).pages))', file], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 })
     : execFileSync('pdftotext', ['-layout', file, '-'], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
   return text.normalize('NFKC').replace(/Ɵ/g, 'ti');
 };
@@ -178,7 +178,7 @@ check('no link to the private VoiceStudio repository', !/github\.com\/mirabhakta
 check('ContextOS is presented as a private project', /Private project/.test(work), 'missing');
 check('VoiceStudio Live is presented as a private project', /VoiceStudio Live/.test(work), 'missing');
 check('VoiceStudio credits its open-source base', work.includes('https://github.com/debpalash/VoiceStudio'), 'missing');
-check('VoiceStudio credits Applio', work.includes('https://github.com/IAHispano/Applio'), 'missing');
+check('VoiceStudio credits Applio', /href:\s*['"]https:\/\/github\.com\/IAHispano\/Applio['"]/.test(work), 'missing');
 check('VoiceStudio describes live pitch correction and RVC', /key-aware pitch correction/.test(work) && /Applio-backed voice conversion/.test(work), 'missing');
 
 if (failures.length) {
