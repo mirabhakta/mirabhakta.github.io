@@ -15,6 +15,7 @@ export interface Project {
   // Public project: the canonical public repository URL. Private project:
   // omitted; the detail page offers an email inquiry instead.
   href?: string;
+  liveHref?: string;
   // Verified stack only. Omitted where the stack is not verified.
   stack?: string;
   // Verified role only. Omitted where the role is not verified.
@@ -107,6 +108,26 @@ export const projects: Project[] = [
     caption: 'Hacktech 2026 · Caltech.',
     width: 1400,
     height: 904,
+  },
+  {
+    name: 'Artist Atlas',
+    slug: 'artist-atlas',
+    summary: 'A network analysis of 156K Spotify artists and 300K collaboration links, exploring artist influence, genre communities, and the relationship between connectivity and popularity. Findings are presented in an interactive dashboard.',
+    shortStack: 'Python · NetworkX · Streamlit · Plotly',
+    purpose: 'Understand which artists connect music communities and whether an artist’s position in the collaboration network relates to their popularity.',
+    description: 'Cleaned artist and collaboration records, then modeled 156,320 artists and 300,379 links as an undirected network. The analysis uses degree, PageRank, and eigenvector centrality, sampled betweenness on a popularity-filtered subgraph, Louvain community detection, and sampled shortest paths. A Streamlit dashboard presents the analysis through rankings, charts, and community comparisons.',
+    contribution: 'Spring semester course project with Michelle Villagomez and Caden Maki. My work focused on network construction, graph analysis, visualizations, and interpreting the results, alongside Michelle. Caden focused on the final conclusions.',
+    status: 'Course project · team of three · interactive dashboard',
+    kind: 'Network analysis & music discovery',
+    href: 'https://github.com/mirabhakta/artist-atlas',
+    liveHref: 'https://spotify-collaboration-network.streamlit.app/',
+    role: 'Network construction, analysis & visualization',
+    stack: 'Python · pandas · NetworkX · SciPy · python-louvain · Matplotlib · Streamlit · Plotly',
+    preview: '/work/artist-atlas.png',
+    alt: 'Four scatter plots from the Artist Atlas analysis comparing Spotify popularity with degree, betweenness, PageRank, and eigenvector centrality.',
+    caption: 'Analysis output from the project notebook. Betweenness uses a popularity-filtered subgraph; the other three measures use the full network.',
+    width: 1389,
+    height: 990,
   },
   {
     name: 'VoiceStudio Live',

@@ -125,10 +125,8 @@ const rscaRaw = unzipText(RSCA);
 check('RSCA file names the co-author Ruiyang Wang', /Ruiyang\s*Wang/.test(rscaRaw.replace(/<[^>]+>/g, ' ')), 'missing');
 check('RSCA file states the RSCA Conference 2026', /RSCA\s*Conference\s*2026/.test(rscaRaw.replace(/<[^>]+>/g, ' ')), 'missing');
 // Updated collaboration and presentation details are supplied by Mira.
-check('site credits the shared dataset with Wendy', has(research, 'Wendy and I split the data collection and jointly built'), 'missing');
-check('site distinguishes the individual NCUR presentation', has(research, 'NCUR 2026.') && has(research, 'I presented the research individually'), 'missing');
-check('site records the joint CPP presentations', has(research, 'RSCA 2026') && has(research, 'CARS 2026') && has(research, 'Wendy and I presented the research together'), 'missing');
-check('site explicitly says it is not a published paper', has(research, 'not a published paper'), 'missing');
+check('site credits the shared dataset with Ruiyang Wang', has(research, 'Dataset developed in collaboration with Ruiyang Wang'), 'missing');
+check('site records the conference presentations', ['National Conference on Undergraduate Research (NCUR) 2026', 'Student Research, Scholarship, and Creative Activities Conference (RSCA) 2026', 'Creative Activities and Research Symposium (CARS) 2026'].every((event) => has(research, event)), 'missing');
 check('site does not claim the study is published', !/(?<!not a )(?<!not )published (paper|article|study|journal)/i.test(research.replace(/\s+/g, ' ')), 'claims publication');
 check('site does not claim a journal publication anywhere', !/\bjournal\b/i.test(research), 'mentions a journal');
 check('site does not claim awards or acceptance', !/\baccepted (paper|abstract|poster)\b/i.test(research), 'claims acceptance');
