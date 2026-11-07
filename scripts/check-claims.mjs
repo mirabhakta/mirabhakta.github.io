@@ -88,6 +88,20 @@ const check = (name, ok, detail) => {
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${ok ? '' : ` — ${detail}`}`);
 };
 const has = (text, needle) => tight(text).includes(tight(needle));
+const hasUrl = (text, expected) => {
+  const target = new URL(expected);
+  const urls = text.match(/https?:\/\/[^\s'"<>]+/g) ?? [];
+  return urls.some((candidate) => {
+    try {
+      const actual = new URL(candidate);
+      return actual.protocol === target.protocol
+        && actual.hostname === target.hostname
+        && actual.pathname.replace(/\/$/, '') === target.pathname.replace(/\/$/, '');
+    } catch {
+      return false;
+    }
+  });
+};
 
 // ---------------------------------------------------------------- research
 check('research copy excludes the Cal Poly Pomona IT Service Desk', !/service desk|it service/i.test(research), 'found');
@@ -164,8 +178,8 @@ check('site includes Metal Toad financial and stakeholder scope', has(experience
 check('site includes IMI engagement impact', has(experience, '25%+ increase in client engagement'), 'missing');
 
 // ------------------------------------------------------------------ contact
-check('contact links to GitHub', contact.includes('https://github.com/mirabhakta'), 'missing');
-check('contact links to the corrected LinkedIn handle', contact.includes('https://www.linkedin.com/in/mirabbhakta'), 'missing');
+check('contact links to GitHub', hasUrl(contact, 'https://github.com/mirabhakta'), 'missing');
+check('contact links to the corrected LinkedIn handle', hasUrl(contact, 'https://www.linkedin.com/in/mirabbhakta'), 'missing');
 check('contact publishes the verified professional email', contact.includes('href="mailto:miraabhakta@gmail.com"'), 'the mailto link is missing or different');
 check('contact shows the verified address as visible text', contact.includes('miraabhakta@gmail.com'), 'the address text is missing');
 check('contact publishes no other email address', !/@[\w.-]+\.[a-z]{2,}/i.test(contact.replace(/miraabhakta@gmail\.com/g, '')), 'an unexpected email address is present');
@@ -177,7 +191,7 @@ check('no link to the private ContextOS repository', !/github\.com\/mirabhakta\/
 check('no link to the private VoiceStudio repository', !/github\.com\/mirabhakta\/VoiceStudio-Live/i.test(work), 'still linked');
 check('ContextOS is presented as a private project', /Private project/.test(work), 'missing');
 check('VoiceStudio Live is presented as a private project', /VoiceStudio Live/.test(work), 'missing');
-check('VoiceStudio credits its open-source base', work.includes('https://github.com/debpalash/VoiceStudio'), 'missing');
+check('VoiceStudio credits its open-source base', hasUrl(work, 'https://github.com/debpalash/VoiceStudio'), 'missing');
 check('VoiceStudio credits Applio', work.includes('https://github.com/IAHispano/Applio'), 'missing');
 check('VoiceStudio describes live pitch correction and RVC', /key-aware pitch correction/.test(work) && /Applio-backed voice conversion/.test(work), 'missing');
 
