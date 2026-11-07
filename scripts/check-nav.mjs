@@ -38,7 +38,7 @@ try {
   check('nav element carries the primary-navigation id', markup.navId === 'primary-navigation', `got ${markup.navId}`);
   check('toggle aria-controls points at the nav element', markup.controls === markup.navId, `controls=${markup.controls} navId=${markup.navId}`);
   check('toggle starts collapsed', markup.expanded === 'false', `got ${markup.expanded}`);
-  check('five nav links present', markup.anchors.length === 5, `got ${markup.anchors.length}`);
+  check('three section nav links present', markup.anchors.length === 3, `got ${markup.anchors.length}`);
   for (const s of markup.sections) {
     check(`section #${s.id} exists`, s.found, 'not found');
   }
@@ -97,20 +97,22 @@ try {
 
   // Public project links resolve; private projects are not linked.
   const links = await page.eval(`(() => {
-    const rows = Array.from(document.querySelectorAll('.work__row'));
+    const rows = Array.from(document.querySelectorAll('.project'));
     return rows.map((r) => ({
-      name: r.querySelector('.work__name')?.textContent.trim(),
-      href: r.tagName === 'A' ? r.getAttribute('href') : null,
-      note: r.querySelector('.work__meta-text')?.textContent.trim(),
+      name: r.querySelector('h3')?.textContent.trim(),
+      href: r.querySelector('h3 a')?.getAttribute('href'),
     }));
   })()`);
+  check('five projects are featured', links.length === 5, `got ${links.length}`);
   for (const row of links) {
-    if (row.href) {
-      check(`${row.name} links to a public repository`, /^https:\/\/github\.com\/mirabhakta\//.test(row.href), row.href);
-    } else {
-      check(`${row.name} is presented as private`, /Private project/.test(row.note || ''), row.note || 'no status note');
-    }
+    check(`${row.name} links to a detail page`, /^\/work\/[a-z-]+\/$/.test(row.href), row.href);
   }
+  const email = await page.eval(`(() => {
+    const a = document.querySelector('.header-email');
+    const r = a.getBoundingClientRect();
+    return { href: a.getAttribute('href'), visible: r.top >= 0 && r.bottom <= innerHeight };
+  })()`);
+  check('direct email stays visible on mobile', email.href === 'mailto:miraabhakta@gmail.com' && email.visible, JSON.stringify(email));
 
   await page.close();
 } finally {

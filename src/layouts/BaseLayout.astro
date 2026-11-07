@@ -7,9 +7,10 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
+  image?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, image = '/work/contextos.png' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -20,7 +21,21 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.site)} />
     <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#f5f3ed" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2317171a'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23f2f1ee' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E"
+    />
 
     <link rel="preconnect" href="https://api.fontshare.com" />
     <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
@@ -35,6 +50,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <slot />
+    <footer class="site-footer page-gutter">
+      <p class="site-footer__name">Mira Bhakta</p>
+      <p class="site-footer__note">
+        A little curiosity, built into software.
+      </p>
+    </footer>
   </body>
 </html>

@@ -1,0 +1,48 @@
+---
+interface Props {
+  kind: 'pitch' | 'jarvis';
+  compact?: boolean;
+}
+const { kind, compact = false } = Astro.props;
+const pitch = kind === 'pitch';
+const titleId = `${kind}-visual-title`;
+const descId = `${kind}-visual-description`;
+---
+<div class:list={['work-visual', `work-visual--${kind}`, { 'work-visual--compact': compact }]} data-work-visual={kind}>
+  <div class="work-visual__header">
+    <p class="work-visual__title">{pitch ? 'VoiceStudio Live' : 'Jarvis'}</p>
+    <span class="work-visual__label">{pitch ? 'Pitch illustration' : 'Workflow illustration'}</span>
+  </div>
+  {pitch ? (
+    <svg class="work-visual__drawing pitch-drawing" viewBox="0 0 640 270" role="img" aria-labelledby={titleId} aria-describedby={descId}>
+      <title id={titleId}>Pitch following a musical scale</title>
+      <desc id={descId}>An illustrative detected-pitch curve varies around C4, D4, and E4. A dashed target-note line follows those notes. This is a conceptual explanation, not a measured audio trace.</desc>
+      <g class="diagram-grid"><path d="M64 48H608M64 118H608M64 188H608" /></g>
+      <g class="diagram-note-label"><text x="12" y="54">E4</text><text x="12" y="124">D4</text><text x="12" y="194">C4</text></g>
+      <path class="pitch-input" d="M72 200C88 182 94 165 110 176S132 213 148 197S172 159 188 177S210 193 226 164S247 94 265 105S286 146 304 125S326 88 344 109S366 140 384 100S408 36 426 44S449 76 468 51S490 24 510 43S536 80 556 54S584 34 605 42" />
+      <path class="pitch-target" d="M72 188H226Q242 188 242 172V134Q242 118 258 118H378Q394 118 394 102V64Q394 48 410 48H605" />
+      <g class="pitch-target-dot"><circle cx="148" cy="188" r="5"/><circle cx="310" cy="118" r="5"/><circle cx="510" cy="48" r="5"/></g>
+      <path class="diagram-axis" d="M64 228H608M602 223L608 228L602 233" />
+      <text class="diagram-axis-label" x="64" y="256">time</text>
+    </svg>
+  ) : (
+    <svg class="work-visual__drawing message-drawing" viewBox="0 0 640 280" role="img" aria-labelledby={titleId} aria-describedby={descId}>
+      <title id={titleId}>A housekeeping message becomes a confirmed action</title>
+      <desc id={descId}>Four steps: receive a message through Photon; authorize the sender and route the request; preview the shift and require an explicit YES; save to Google Sheets and reply. This is a workflow illustration, not a conversation screenshot.</desc>
+      <g class="message-connector"><path d="M274 69H366M358 63L366 69L358 75M494 105V175M488 167L494 175L500 167M366 211H274M282 205L274 211L282 217"/></g>
+      <g class="message-node"><rect x="20" y="33" width="254" height="72" rx="5"/><rect x="366" y="33" width="254" height="72" rx="5"/><rect x="366" y="175" width="254" height="72" rx="5"/></g>
+      <rect class="message-node--action" x="20" y="175" width="254" height="72" rx="5"/>
+      <g class="message-step"><text x="36" y="59">01</text><text x="382" y="59">02</text><text x="382" y="201">03</text></g>
+      <text class="message-step message-step--light" x="36" y="201">04</text>
+      <g class="message-title"><text x="70" y="62"><tspan class="diagram-long-label">Receive message</tspan><tspan class="diagram-short-label">Message</tspan></text><text x="416" y="62"><tspan class="diagram-long-label">Authorize + route</tspan><tspan class="diagram-short-label">Route</tspan></text><text x="416" y="204"><tspan class="diagram-long-label">Preview + confirm</tspan><tspan class="diagram-short-label">Confirm</tspan></text></g>
+      <text class="message-title message-title--light" x="70" y="204">Save + reply</text>
+      <g class="message-subtitle"><text x="70" y="86">iMessage via Photon</text><text x="416" y="86">Housekeeping agent</text><text x="416" y="228">Explicit “YES” required</text></g>
+      <text class="message-subtitle message-subtitle--light" x="70" y="228">Google Sheets + receipt</text>
+      <text class="message-annotation" x="320" y="143" text-anchor="middle">A request is not yet a saved action.</text>
+    </svg>
+  )}
+  <div class="work-visual__footer">
+    {pitch ? <div class="pitch-legend"><span><i class="pitch-legend__input" aria-hidden="true"></i>Detected pitch</span><span><i class="pitch-legend__target" aria-hidden="true"></i>Target notes</span></div> : <p>Preview → confirm → save</p>}
+    <p class="work-visual__disclaimer">{pitch ? 'Illustrative curves · not measured audio' : 'Illustrated workflow · not a live conversation'}</p>
+  </div>
+</div>

@@ -1,31 +1,27 @@
 ---
-// Short editorial introduction. Interests are stated plainly, without claims.
+import ArtistNetwork from './ArtistNetwork.astro';
+import { personal } from '../data/personal';
+import { Image } from 'astro:assets';
 ---
-
 <section class="about page-gutter" id="about" aria-labelledby="about-title">
-  <div class="about__grid">
-    <div class="about__aside">
-      <h2 class="about__title" id="about-title">About</h2>
-    </div>
-
+  <div class="about__layout">
+    <div><p class="eyebrow">A little about me</p><h2 id="about-title">Curious about<br /><em>the connections.</em></h2><ArtistNetwork /></div>
     <div class="about__body">
-      <p class="about__lead">
-        I build software that pays attention to context, and I am interested in
-        the point where language, judgment, and money meet.
-      </p>
-      <p class="about__text">
-        Most of my work sits in that intersection. ContextOS keeps what an AI
-        assistant believes about you under your own control. LedgerGuard stops
-        an agent from moving money on a hunch. Kandor is a browser extension
-        for online safety. In the lab, I work on how AI-generated content and
-        sustainability messaging change the way investors evaluate a venture.
-      </p>
-      <p class="about__text">
-        I am a Computer Science student at Cal Poly Pomona with an Economics
-        minor, and I work as a PMO intern and a research assistant. The rest is
-        software engineering, teaching math and reading, and music, which is
-        where most of my thinking about structure and sound comes from.
-      </p>
+      <p>I’m Mira, a Computer Science student at Cal Poly Pomona with an Economics minor, graduating in May 2027. I’m interested in how software makes complicated information easier to understand and use, especially when AI is part of the decision.</p>
+      <p>My work spans engineering, undergraduate research, and business operations. I like questions that cross those boundaries: how systems use context, how people evaluate information, and how to explain an idea clearly.</p>
     </div>
+  </div>
+  <div class:list={['about__personal', { 'about__personal--with-photo': personal.photo }]}>
+    {personal.photo && <figure class="about__photo"><Image src={personal.photo.src} alt={personal.photo.alt} width={480} widths={[240, 480, 720]} sizes="(max-width: 1024px) 180px, 190px" format="webp" quality={85} loading="lazy" decoding="async" />{personal.photo.caption && <figcaption>{personal.photo.caption}</figcaption>}</figure>}
+    <article class="personal-note" aria-labelledby="personal-music">
+      <p class="personal-note__label">Creative interests</p>
+      <h3 id="personal-music">Music, in the mix.</h3>
+      <p>{personal.music}</p>
+    </article>
+    <article class="personal-note" aria-labelledby="personal-seoul">
+      <p class="personal-note__label">Study abroad · 2024</p>
+      <h3 id="personal-seoul">A summer in Seoul.</h3>
+      <p>{personal.seoul}</p>
+    </article>
   </div>
 </section>

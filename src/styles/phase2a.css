@@ -2,13 +2,16 @@
 
 @layer components {
   .site-header {
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: 20;
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
     min-height: 72px;
     gap: 1rem;
+    background: color-mix(in srgb, var(--color-ground) 92%, transparent);
+    backdrop-filter: blur(8px);
   }
 
   .wordmark {
@@ -186,6 +189,72 @@
 }
 
 .text-link:active .text-link__arrow { transform: translateX(4px) scale(0.92); }
+
+@layer components {
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.5rem;
+    margin-top: 1.75rem;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.4rem;
+    background: var(--color-charcoal);
+    color: var(--color-on-charcoal);
+    font-size: var(--text-body);
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: var(--radius-control);
+    transition: background var(--t-hover) ease, transform var(--t-press) var(--ease-out);
+  }
+
+  .btn-primary:hover {
+    background: var(--color-accent-strong);
+  }
+
+  .hero__secondary {
+    margin-top: 0;
+  }
+
+  .hero__links {
+    margin: 1rem 0 0;
+    font-size: var(--text-small);
+    color: var(--color-muted);
+  }
+
+  .hero__links a {
+    color: var(--color-ink-soft);
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 1px;
+  }
+
+  .site-footer {
+    display: grid;
+    gap: 0.5rem;
+    padding-block: 3rem;
+  }
+
+  .site-footer__name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.4rem + 2.5vw, 3rem);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .site-footer__note {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: var(--text-small);
+  }
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .js .hero [data-line] {

@@ -3,21 +3,22 @@ import { nav } from '../data/site';
 ---
 
 <header class="site-header page-gutter">
-  <a class="wordmark" href="#top" aria-label="Mira Bhakta, home">MB</a>
+  <a class="wordmark" href="/#top" aria-label="Mira Bhakta, home">MB</a>
+
+  <a class="header-email" href="mailto:miraabhakta@gmail.com">Get in touch <span aria-hidden="true">↗</span></a>
+  <button class="site-nav__toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+    <span class="site-nav__toggle-label">Menu</span>
+  </button>
 
   <nav class="site-nav" id="primary-navigation" aria-label="Primary navigation">
     <ul class="site-nav__list">
       {nav.map((item) => (
         <li>
-          <a class="site-nav__link" href={item.href}>{item.label}</a>
+          <a class="site-nav__link" href={Astro.url.pathname === '/' ? item.href : '/' + item.href}>{item.label}</a>
         </li>
       ))}
     </ul>
   </nav>
-
-  <button class="site-nav__toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
-    <span class="site-nav__toggle-label">Menu</span>
-  </button>
 </header>
 
 <script>

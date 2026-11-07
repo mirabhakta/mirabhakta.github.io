@@ -12,14 +12,12 @@ export const site = {
     'I build intelligent systems and the software around them — AI agents, context infrastructure, and tools for safety and financial decisions. Computer Science with an Economics minor at Cal Poly Pomona.',
   links: {
     github: 'https://github.com/mirabhakta',
-    linkedin: 'https://www.linkedin.com/in/mirabhakta',
+    linkedin: 'https://www.linkedin.com/in/mirabbhakta',
   },
 } as const;
 
 export const nav = [
   { label: 'Work', href: '#work' },
-  { label: 'Research', href: '#research' },
   { label: 'Experience', href: '#experience' },
   { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
 ] as const;

@@ -7,7 +7,8 @@
 //   C:/Users/miraa/Downloads/Mira_Bhakta_resume1.pdf
 //   C:/Users/miraa/Documents/crowdcube_scraper/FINAL_COMPLETION_REPORT.md
 //
-// Run:  node scripts/check-claims.mjs
+// Run: node scripts/check-claims.mjs [python-with-pypdf]
+// An optional Python path enables PDF extraction without system pdftotext.
 import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 
@@ -37,20 +38,29 @@ const unzipText = (file) => {
 
 const POSTER = 'C:/Users/miraa/Downloads/CARS_MiraBhakta_poster.odp (48 x 36 in).pdf';
 const RSCA = 'C:/Users/miraa/OneDrive - Cal Poly Pomona/RSCA_poster.pptx';
-const RESUME = 'C:/Users/miraa/Downloads/Mira_Bhakta_resume1.pdf';
+const RESUME = 'C:/Users/miraa/Downloads/Mira_Bhakta_AI_IT_Support_Resume.pdf';
+const HISTORIC_RESUME = 'C:/Users/miraa/Downloads/Mira_Bhakta_resume1.pdf';
+const MASTER_RESUME = 'C:/Users/miraa/Downloads/Master Resume.pdf';
 const AUDIT = 'C:/Users/miraa/Documents/crowdcube_scraper/FINAL_COMPLETION_REPORT.md';
 const SITE = 'C:/Users/miraa/mirabhakta.github.io/src';
 
-const pdftotext = (file) =>
-  execFileSync('pdftotext', ['-layout', file, '-'], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
+const pdftotext = (file) => {
+  const python = process.argv[2];
+  const text = python
+    ? execFileSync(python, ['-X', 'utf8', '-c', 'import sys; from pypdf import PdfReader; print("\\n".join(p.extract_text() for p in PdfReader(sys.argv[1]).pages))', file], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 })
+    : execFileSync('pdftotext', ['-layout', file, '-'], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
+  return text.normalize('NFKC').replace(/Ɵ/g, 'ti');
+};
 
 const poster = pdftotext(POSTER);
 const resume = pdftotext(RESUME);
+const historicResume = pdftotext(HISTORIC_RESUME);
+const masterResume = pdftotext(MASTER_RESUME);
 const audit = readFileSync(AUDIT, 'utf8');
-const research = readFileSync(`${SITE}/components/Research.astro`, 'utf8');
+const research = readFileSync(`${SITE}/pages/research.astro`, 'utf8');
 const experience = readFileSync(`${SITE}/components/Experience.astro`, 'utf8');
 const contact = readFileSync(`${SITE}/components/Contact.astro`, 'utf8');
-const work = readFileSync(`${SITE}/components/SelectedWork.astro`, 'utf8');
+const work = readFileSync(`${SITE}/data/projects.ts`, 'utf8');
 
 // The PDF and PPTX extract to text with spacing artefacts, so compare on a
 // whitespace-collapsed, case-insensitive form.
@@ -114,26 +124,28 @@ check('site states the findings are not causal effects', has(research, 'associat
 const rscaRaw = unzipText(RSCA);
 check('RSCA file names the co-author Ruiyang Wang', /Ruiyang\s*Wang/.test(rscaRaw.replace(/<[^>]+>/g, ' ')), 'missing');
 check('RSCA file states the RSCA Conference 2026', /RSCA\s*Conference\s*2026/.test(rscaRaw.replace(/<[^>]+>/g, ' ')), 'missing');
-check('site names the co-author', has(research, 'Ruiyang Wang'), 'missing');
-check('site states the presentation status', has(research, 'Presented at the RSCA Conference 2026'), 'missing');
+// Updated collaboration and presentation details are supplied by Mira.
+check('site credits the shared dataset with Wendy', has(research, 'Wendy and I split the data collection and jointly built'), 'missing');
+check('site distinguishes the individual NCUR presentation', has(research, 'NCUR 2026.') && has(research, 'I presented the research individually'), 'missing');
+check('site records the joint CPP presentations', has(research, 'RSCA 2026') && has(research, 'CARS 2026') && has(research, 'Wendy and I presented the research together'), 'missing');
 check('site explicitly says it is not a published paper', has(research, 'not a published paper'), 'missing');
-check('site does not claim the study is published', !/(?<!not a )(?<!not )published (paper|article|study|journal)/i.test(research), 'claims publication');
+check('site does not claim the study is published', !/(?<!not a )(?<!not )published (paper|article|study|journal)/i.test(research.replace(/\s+/g, ' ')), 'claims publication');
 check('site does not claim a journal publication anywhere', !/\bjournal\b/i.test(research), 'mentions a journal');
 check('site does not claim awards or acceptance', !/\baccepted (paper|abstract|poster)\b/i.test(research), 'claims acceptance');
 
 // ------------------------------------------------------------------- audit
 check('audit report states 219 rows audited', /Total Rows Audited:\*\* 219/.test(audit), 'missing');
 check('audit report states 1,752 field checks', /Total Fields Audited:\*\* 1,752/.test(audit), 'missing');
-check('site states 219 campaigns', has(research, '219 campaigns'), 'missing');
-check('site states 1,752 field checks', has(research, '1,752 field checks'), 'missing');
+check('site states the corrected 220-campaign total', has(research, '220 equity crowdfunding campaigns'), 'missing');
+check('site excludes superseded campaign totals', !/1,000\+|219 campaigns|1,752 field checks/.test(research + experience), 'outdated total remains');
 
 // --------------------------------------------------------------- experience
 const experienceFacts = [
-  ['Metal Toad', 'Project Management Office Intern', 'May 2026'],
+  ['Metal Toad', 'Project Management Office Intern', 'May 2026 to Aug 2026'],
   ['LA-Tech.org', 'Software Engineering Intern, AI/ML, Project Lead', 'Feb 2026 to May 2026'],
-  ['Cal Poly Pomona', 'Undergraduate Research Assistant', 'Aug 2025 to present'],
-  ['Handshake', 'AI Evaluator, contract', 'Dec 2025 to Jan 2026'],
-  ['Kumon', 'Tutor and Instructor', 'June 2025 to present'],
+  ['Cal Poly Pomona', 'Undergraduate Research Assistant', 'Aug 2025 to Aug 2026'],
+  ['Handshake', 'AI Evaluator', 'Dec 2025 to Jan 2026'],
+  ['IMI Exhibits', 'Marketing Assistant', 'Feb 2023 to May 2023'],
 ];
 for (const [org, role, period] of experienceFacts) {
   check(`experience copy has ${org}`, E.includes(tight(org)), 'missing');
@@ -142,15 +154,20 @@ for (const [org, role, period] of experienceFacts) {
 }
 check('resume lists Metal Toad', flexible(resume, 'project management office intern | metal toad'), 'missing');
 check('resume lists LA-Tech.org', flexible(resume, 'engineering intern (ai/ml, project lead) | la-tech.org'), 'missing');
-check('resume lists Kumon', flexible(resume, 'tutor & instructor | kumon north america'), 'missing');
-check('resume lists Handshake', flexible(resume, 'ai evaluator (contract) | handshake'), 'missing');
+check('resume lists IMI Exhibits', flexible(resume, 'marketing intern | imi exhibits'), 'missing');
+check('historic resume lists Handshake', flexible(historicResume, 'ai evaluator (contract) | handshake'), 'missing');
 check('resume lists the undergraduate research role', flexible(resume, 'undergraduate research assistant'), 'missing');
-check('resume lists 1,000+ campaigns', flexible(resume, '1,000+ campaigns'), 'missing');
-check('site states 1,000+ campaigns', has(experience, '1,000+ campaigns'), 'missing');
+check('updated resume lists 220+ campaigns', flexible(resume, '220+'), 'missing');
+check('site states 220 campaigns', has(experience, '220 equity crowdfunding campaigns'), 'missing');
+check('site removes Kumon from selected experience', !/Kumon/.test(experience), 'still present');
+check('site removes the contract qualifier and capitalizes Remote', !/contract/.test(experience) && has(experience, 'Handshake, Remote'), 'display role/location mismatch');
+check('master resume supports two client engagements', flexible(masterResume, 'two client engagements'), 'missing');
+check('site includes Metal Toad financial and stakeholder scope', has(experience, '$100K+') && has(experience, 'two client engagements'), 'missing');
+check('site includes IMI engagement impact', has(experience, '25%+ increase in client engagement'), 'missing');
 
 // ------------------------------------------------------------------ contact
 check('contact links to GitHub', contact.includes('https://github.com/mirabhakta'), 'missing');
-check('contact links to LinkedIn', contact.includes('https://www.linkedin.com/in/mirabhakta'), 'missing');
+check('contact links to the corrected LinkedIn handle', contact.includes('https://www.linkedin.com/in/mirabbhakta'), 'missing');
 check('contact publishes the verified professional email', contact.includes('href="mailto:miraabhakta@gmail.com"'), 'the mailto link is missing or different');
 check('contact shows the verified address as visible text', contact.includes('miraabhakta@gmail.com'), 'the address text is missing');
 check('contact publishes no other email address', !/@[\w.-]+\.[a-z]{2,}/i.test(contact.replace(/miraabhakta@gmail\.com/g, '')), 'an unexpected email address is present');
@@ -162,6 +179,9 @@ check('no link to the private ContextOS repository', !/github\.com\/mirabhakta\/
 check('no link to the private VoiceStudio repository', !/github\.com\/mirabhakta\/VoiceStudio-Live/i.test(work), 'still linked');
 check('ContextOS is presented as a private project', /Private project/.test(work), 'missing');
 check('VoiceStudio Live is presented as a private project', /VoiceStudio Live/.test(work), 'missing');
+check('VoiceStudio credits its open-source base', work.includes('https://github.com/debpalash/VoiceStudio'), 'missing');
+check('VoiceStudio credits Applio', work.includes('https://github.com/IAHispano/Applio'), 'missing');
+check('VoiceStudio describes live pitch correction and RVC', /key-aware pitch correction/.test(work) && /Applio-backed voice conversion/.test(work), 'missing');
 
 if (failures.length) {
   console.error(`\n${failures.length} claim check(s) failed.`);

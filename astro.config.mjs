@@ -7,9 +7,9 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://mirabhakta.me',
   output: 'static',
-  trailingSlash: 'ignore',
+  trailingSlash: 'always',
   build: {
-    format: 'file',
+    format: 'directory',
   },
   vite: {
     plugins: [tailwindcss()],

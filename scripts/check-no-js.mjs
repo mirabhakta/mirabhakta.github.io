@@ -25,7 +25,7 @@ try {
   const state = await page.eval(`(() => {
     const nav = document.querySelector('.site-nav');
     const links = Array.from(document.querySelectorAll('.site-nav__link'));
-    const rows = Array.from(document.querySelectorAll('.work__reveal'));
+    const rows = Array.from(document.querySelectorAll('.project'));
     const visible = (el) => {
       const s = getComputedStyle(el);
       return s.display !== 'none' && s.visibility !== 'hidden' && parseFloat(s.opacity) > 0.01;
@@ -45,9 +45,9 @@ try {
 
   check('the scripting: none media feature is active', state.scriptingMedia, 'emulation did not apply');
   check('nav is visible without scripting', state.navVisible, JSON.stringify(state));
-  check('all five nav links remain reachable without scripting', state.linksVisible === state.linksTotal && state.linksTotal === 5, JSON.stringify(state));
+  check('all three nav links remain reachable without scripting', state.linksVisible === state.linksTotal && state.linksTotal === 3, JSON.stringify(state));
   check('menu button is hidden without scripting', !state.toggleVisible, 'toggle is still shown');
-  check('all ledger rows are visible without scripting', state.rowsVisible === state.rowsTotal, JSON.stringify(state));
+  check('all five projects are visible without scripting', state.rowsVisible === 5 && state.rowsTotal === 5, JSON.stringify(state));
   check('all five sections exist without scripting', state.sections, 'a section is missing');
   check('no horizontal overflow without scripting', state.overflow === 0, `overflow ${state.overflow}`);
 

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-labelledby="title description">
+  <title id="title">Jarvis: a message into a workflow</title>
+  <desc id="description">Architecture diagram. iMessage connects through Photon to an authorized agent router, with branches for developer tools, local knowledge, and operations.</desc>
+  <rect width="1200" height="750" fill="#eeeae4"/>
+  <text x="64" y="72" font-family="Arial,sans-serif" font-size="18" letter-spacing="3" fill="#5a5a62">AI AGENTS · WORKFLOW AUTOMATION</text>
+  <text x="60" y="178" font-family="Georgia,serif" font-size="92" letter-spacing="-3" fill="#17171a">Jarvis</text>
+  <text x="64" y="223" font-family="Arial,sans-serif" font-size="27" fill="#3a3a42">A message into a workflow.</text>
+  <g fill="none" stroke="#a7a2be" stroke-width="3">
+    <path d="M300 333H438M762 333H900M1018 382V443M216 443H1018M216 443V479M600 443V479M984 443V479"/>
+  </g>
+  <g fill="#fbfaf8">
+    <rect x="64" y="284" width="236" height="98" rx="4"/>
+    <rect x="438" y="284" width="324" height="98" rx="4"/>
+  </g>
+  <rect x="900" y="284" width="236" height="98" rx="4" fill="#5f5a7a"/>
+  <g font-family="Arial,sans-serif" text-anchor="middle">
+    <text x="182" y="342" font-size="29" fill="#17171a">iMessage</text>
+    <text x="600" y="342" font-size="29" fill="#17171a">Photon</text>
+    <text x="1018" y="328" font-size="28" fill="#ffffff">Agent router</text>
+    <text x="1018" y="357" font-size="15" fill="#f2f1ee">authorization + delivery state</text>
+  </g>
+  <g fill="#e1dde9">
+    <rect x="64" y="479" width="304" height="154" rx="4"/>
+    <rect x="448" y="479" width="304" height="154" rx="4"/>
+    <rect x="832" y="479" width="304" height="154" rx="4"/>
+  </g>
+  <g font-family="Arial,sans-serif" text-anchor="middle">
+    <g font-size="28" fill="#17171a">
+      <text x="216" y="532">Developer tools</text>
+      <text x="600" y="532">Local knowledge</text>
+      <text x="984" y="532">Operations</text>
+    </g>
+    <g font-size="21" fill="#3a3a42">
+      <text x="216" y="577">OpenCode · GitHub</text>
+      <text x="600" y="577">Obsidian · SQLite</text>
+      <text x="984" y="577">Housekeeping · Sheets</text>
+    </g>
+  </g>
+  <text x="64" y="702" font-family="Arial,sans-serif" font-size="18" letter-spacing="2" fill="#5a5a62">SYSTEM ARCHITECTURE · NOT A CHAT SCREENSHOT</text>
+</svg>
