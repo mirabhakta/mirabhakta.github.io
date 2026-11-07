@@ -51,8 +51,9 @@
     list-style: none;
   }
 
-  /* Rows are separated by space, not hairlines (house rule). */
-  .work__item { padding: 1.75rem 0; }
+  /* Rows are separated by space, not hairlines (house rule).
+     Single spacing layer lives on the row; the item keeps no extra padding. */
+  .work__item { padding: 0; }
   .work__item:first-child { padding-top: 0; }
 
   /* Entrance: a ledger entry resolves as it enters view. */
@@ -84,6 +85,7 @@
       'name year'
       'kind kind'
       'desc desc'
+      'stack stack'
       'preview preview'
       'meta meta';
     align-items: baseline;
@@ -123,6 +125,15 @@
     color: var(--color-ink-soft);
     font-size: var(--text-body);
     line-height: 1.55;
+  }
+
+  .work__stack {
+    grid-area: stack;
+    max-width: 46ch;
+    margin-top: 0.5rem;
+    color: var(--color-muted);
+    font-size: var(--text-small);
+    line-height: 1.5;
   }
 
   .work__meta {
@@ -181,6 +192,10 @@
     background: transparent;
     aspect-ratio: 16 / 10;
     transition: opacity 240ms ease;
+  }
+
+  .work__preview-frame.is-switching {
+    opacity: 0.25;
   }
 
   .work__preview-image {
@@ -315,6 +330,7 @@
       'name year'
       'kind kind'
       'desc desc'
+      'stack stack'
       'preview preview'
       'meta meta';
     padding: 1rem 0 1.25rem;

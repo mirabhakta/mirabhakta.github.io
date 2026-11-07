@@ -188,6 +188,35 @@
   color: var(--color-ink-soft);
 }
 
+.experience__points {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: 64ch;
+  color: var(--color-ink-soft);
+  display: grid;
+  gap: 0.6rem;
+}
+
+.experience__points li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.experience__points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--color-accent);
+}
+
+.research__study-work {
+  color: var(--color-ink-soft);
+}
+
 /* ---------- About: a charcoal field, statement on the left ---------- */
 
 .about {
@@ -228,6 +257,10 @@
 
 .about__text:last-child {
   margin-bottom: 0;
+}
+
+.about__toolbox {
+  color: var(--color-on-charcoal);
 }
 
 /* ---------- Contact: the close, name and links at full width ---------- */

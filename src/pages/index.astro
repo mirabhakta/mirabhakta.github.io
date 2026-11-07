@@ -1,6 +1,5 @@
 ---
-// Phase 2A page: header, hero and the approved ledger-rule detail.
-// Phase 2B replaced the phase anchors with the full homepage sections.
+// Compact homepage; project and research details live on dedicated routes.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
@@ -17,11 +16,11 @@ import Contact from '../components/Contact.astro';
 >
   <div id="top"></div>
   <Nav />
-  <main>
+  <main id="main">
     <Hero />
     <SelectedWork />
-    <Research />
     <Experience />
+    <Research />
     <About />
     <Contact />
   </main>

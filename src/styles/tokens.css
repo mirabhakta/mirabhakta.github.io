@@ -1,19 +1,23 @@
-/* Soft Monument — design tokens.
-   Source of record: portfolio-design/soft-monument-direction.json
-   Every value here is taken from that file. Do not add tokens that are not in it. */
+/* Shared portfolio tokens: warm ivory, weathered blue, sage, and sand. */
 
 @theme {
-  /* ---- palette: ivory, charcoal and lilac ---- */
-  --color-ground: #f2f1ee;
-  --color-surface: #e8e6e1;
-  --color-raised: #fbfaf8;
-  --color-ink: #17171a;
-  --color-ink-soft: #3a3a42;
-  --color-muted: #5a5a62;
-  --color-accent: #6b6688;
-  --color-accent-strong: #5f5a7a;
-  --color-accent-light: #a7a2be;
+  /* ---- palette: coastal earth tones ---- */
+  --color-ground: #f5f3ed;
+  --color-surface: #e8e7e0;
+  --color-raised: #fcfbf7;
+  --color-ink: #2d3534;
+  --color-ink-soft: #47514d;
+  --color-muted: #5d655f;
+  --color-accent: #506771;
+  --color-accent-strong: #3c535c;
+  --color-accent-light: #a6b4b6;
   --color-accent-ink: #ffffff;
+  --color-sand: #e9e3d8;
+  --color-sage: #819184;
+  --color-sage-ink: #53675a;
+  --color-sage-wash: #e1e7e0;
+  --color-ocean-wash: #e2e9e9;
+  --color-earth: #786957;
   --color-rose: #c9a0a0;
   --color-charcoal: #17171a;
   --color-on-charcoal: #f2f1ee;

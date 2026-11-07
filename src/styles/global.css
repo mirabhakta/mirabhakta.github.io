@@ -1,8 +1,6 @@
 @import 'tailwindcss';
 @import './tokens.css';
-@import './phase2a.css';
-@import './work.css';
-@import './sections.css';
+@import './portfolio.css';
 
 /* Base layer: page ground, ink, focus ring, reduced-motion fallbacks.
    Nothing here is a component; components live in src/components. */
@@ -33,10 +31,10 @@
     line-height: 0.9;
   }
 
-  /* Focus ring: 2px solid rose at 2px offset, per the direction sheet.
-     Visible on both ivory and charcoal grounds. */
+  /* Focus ring: 2px solid accent-strong at 2px offset.
+     Darker than rose so it stays visible on ivory and charcoal. */
   :focus-visible {
-    outline: 2px solid var(--color-rose);
+    outline: 2px solid var(--color-accent-strong);
     outline-offset: 2px;
   }
 
@@ -49,6 +47,26 @@
 @layer utilities {
   .page-gutter {
     padding-inline: var(--spacing-page);
+  }
+
+  /* Skip link: hidden until focused. */
+  .skip-link {
+    position: absolute;
+    left: var(--spacing-page);
+    top: -100px;
+    z-index: 50;
+    padding: 0.75rem 1rem;
+    background: var(--color-charcoal);
+    color: var(--color-on-charcoal);
+    font-size: var(--text-small);
+    text-decoration: none;
+    border-radius: var(--radius-control);
+    transition: top var(--t-ui) var(--ease-out);
+  }
+
+  .skip-link:focus-visible {
+    top: 12px;
+    outline: 2px solid var(--color-accent-ink);
   }
 
   /* the page's one anchor line, reused by every section */
