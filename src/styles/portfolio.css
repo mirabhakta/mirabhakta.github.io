@@ -18,9 +18,8 @@ h3 { line-height: 1.15; }
 .page-gutter { width: 100%; max-width: 1296px; margin-inline: auto; }
 section[id] { scroll-margin-top: 6rem; }
 .eyebrow { font-size: .75rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--color-muted); margin: 0 0 1.5rem; }
-.site-header { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: 1fr auto auto; align-items: center; min-height: 80px; gap: 2.5rem; background: color-mix(in srgb, var(--color-ground) 96%, transparent); backdrop-filter: blur(12px); }
+.site-header { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: 1fr auto auto; align-items: center; min-height: 80px; gap: 2.5rem; background: color-mix(in srgb, var(--color-ground) 96%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent); }
 .wordmark { font-family: var(--font-display); font-size: 1.5rem; text-decoration: none; }
-.wordmark::after { content: ''; display: inline-block; width: 6px; height: 6px; margin-left: 5px; background: var(--color-sage); }
 .site-nav { grid-column: 2; grid-row: 1; }
 .site-nav__list { display: flex; gap: 2rem; list-style: none; padding: 0; margin: 0; }
 .site-nav__link { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; font-size: .875rem; }
@@ -29,7 +28,7 @@ section[id] { scroll-margin-top: 6rem; }
 .hero { padding-block: 64px 80px; }
 .hero h1 { font-size: var(--text-monument); letter-spacing: -.055em; line-height: 1; margin: 0 0 48px; position: relative; }
 .hero h1 em { font-style: normal; margin-inline-start: .12em; }
-.hero__asterisk { display: inline-block; vertical-align: top; color: var(--color-earth); font-family: Georgia, serif; font-size: .38em; margin: .15em 0 0 .5em; }
+.hero__mark { display: inline-block; vertical-align: top; color: var(--color-earth); width: .38em; height: .38em; margin: .06em 0 0 .19em; }
 .hero__bottom { display: grid; grid-template-columns: 1.35fr 1fr; gap: 3rem; align-items: start; }
 .hero__intro { font-size: clamp(1.5rem, 2.5vw, 2.25rem); line-height: 1.35; margin: 0; letter-spacing: -.025em; }
 .hero__details p { margin: 0; font-size: .9375rem; }
@@ -82,17 +81,23 @@ section[id] { scroll-margin-top: 6rem; }
 .research-preview { display: grid; grid-template-columns: 1.35fr 1fr; gap: 48px; background: var(--color-sage-wash); border-left: 4px solid var(--color-sage); padding: 48px; }
 .research-preview p:not(.eyebrow) { font-size: .9375rem; line-height: 1.7; margin: 0 0 1rem; }
 .research-preview .research-preview__status { color: var(--color-muted); font-size: .75rem; }
-.about__layout { display: grid; grid-template-columns: 1.35fr 1fr; gap: 48px; }
+.about__layout { display: grid; grid-template-columns: minmax(0, 1fr) 240px; grid-template-areas: 'heading photo' 'body photo'; gap: 24px 64px; align-items: start; max-width: 1080px; }
+.about__heading { grid-area: heading; }
+.about__body { grid-area: body; }
 .about__body p { font-size: .9375rem; line-height: 1.8; margin: 0 0 1rem; max-width: 62ch; }
 .about .eyebrow { color: var(--color-sage-ink); }
 .about__personal { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 48px; margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--color-accent-light); }
-.about__personal--with-photo { grid-template-columns: minmax(140px, 190px) repeat(2, minmax(0, 1fr)); }
-.about__photo { margin: 0; }
-.about__photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 22%; border: 6px solid var(--color-sand); }
+.about__photo { grid-area: photo; align-self: center; margin: 0; width: 240px; }
+.about__photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 35%; border-radius: 4px; }
 .personal-note { max-width: 54ch; }
 .personal-note__label { color: var(--color-sage-ink); font-size: .75rem; margin: 0 0 12px; letter-spacing: .06em; }
 .personal-note h3 { font-size: 1.75rem; line-height: 1.15; margin: 0 0 16px; }
-.personal-note > p:last-child { color: var(--color-ink-soft); font-size: .9375rem; line-height: 1.8; margin: 0; }
+.personal-note > p:not(.personal-note__label) { color: var(--color-ink-soft); font-size: .9375rem; line-height: 1.8; margin: 0 0 16px; }
+.personal-note > p:last-child { margin-bottom: 0; }
+.about__travel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 32px; }
+.about__travel figure { margin: 0; }
+.about__travel img { display: block; width: 100%; height: auto; }
+.about__travel figcaption { margin-top: 10px; color: var(--color-ink-soft); font-size: .8125rem; line-height: 1.5; }
 .contact { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px; padding-block: 56px; border-top: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent); }
 .contact .eyebrow { margin-bottom: 1rem; }
 .contact__email { display: inline-flex; min-height: 44px; align-items: center; gap: 1rem; font-size: clamp(1rem,2vw,1.375rem); text-decoration: none; margin-top: 1rem; overflow-wrap: anywhere; box-shadow: inset 0 -.18em var(--color-sand); transition: color 180ms, box-shadow 180ms; }
@@ -213,8 +218,6 @@ figcaption { font-size: .875rem; color: var(--color-muted); margin-top: 12px; li
 }
 @keyframes enter { from { transform: translateY(8px); } to { transform: translateY(0); } }
 @media (max-width:1024px) {
-  .about__personal--with-photo { grid-template-columns: minmax(120px, 180px) minmax(0, 1fr); }
-  .about__personal--with-photo .about__photo { grid-row: span 2; }
   .experience { grid-template-columns: 1fr; gap: 32px; }
   .experience__intro { max-width: 60ch; }
   .research-preview { padding: 32px; grid-template-columns: 1fr; gap: 28px; }
@@ -232,10 +235,12 @@ figcaption { font-size: .875rem; color: var(--color-muted); margin-top: 12px; li
   .hero { padding-block: 36px 48px; }
   .hero .eyebrow { font-size: .625rem; margin-bottom: 24px; }
   .hero h1 { margin-bottom: 32px; }
-  .hero__asterisk { font-size: .28em; margin-left: .4em; }
+  .hero__mark { width: .28em; height: .28em; margin-left: .11em; }
   .hero__bottom, .section-head, .about__layout { grid-template-columns: 1fr; gap: 24px; }
-  .about__personal, .about__personal--with-photo { grid-template-columns: minmax(0, 1fr); gap: 28px; margin-top: 28px; padding-top: 28px; }
-  .about__personal--with-photo .about__photo { grid-row: auto; max-width: 180px; }
+  .about__layout { grid-template-areas: 'heading' 'photo' 'body'; }
+  .about__photo { width: 180px; }
+  .about__personal { grid-template-columns: minmax(0, 1fr); gap: 28px; margin-top: 28px; padding-top: 28px; }
+  .about__travel { grid-template-columns: minmax(0, 1fr); }
   .hero__intro { font-size: 1.5rem; }
   .hero__actions { margin-top: 20px; }
   .project-grid { grid-template-columns: minmax(0,1fr); gap: 40px; }
