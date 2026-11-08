@@ -1,27 +1,31 @@
 ---
-import ArtistNetwork from './ArtistNetwork.astro';
 import { personal } from '../data/personal';
 import { Image } from 'astro:assets';
 ---
 <section class="about page-gutter" id="about" aria-labelledby="about-title">
   <div class="about__layout">
-    <div><p class="eyebrow">A little about me</p><h2 id="about-title">Curious about<br /><em>the connections.</em></h2><ArtistNetwork /></div>
-    <div class="about__body">
-      <p>I’m Mira, a Computer Science student at Cal Poly Pomona with an Economics minor, graduating in May 2027. I’m interested in how software makes complicated information easier to understand and use, especially when AI is part of the decision.</p>
-      <p>My work spans engineering, undergraduate research, and business operations. I like questions that cross those boundaries: how systems use context, how people evaluate information, and how to explain an idea clearly.</p>
+    <div class="about__heading">
+      <p class="eyebrow">A little about me</p><h2 id="about-title">Curious about<br /><em>the connections.</em></h2>
     </div>
+    <div class="about__body">
+      <p>I’m Mira, a Computer Science student at Cal Poly Pomona with an Economics minor. I’ve always been drawn to creating something of my own—something people find useful and that makes a meaningful difference in their lives.</p>
+      <p>My projects often start with something I want to make possible. Jarvis began with a simple idea: staying connected to my laptop and working on side projects from my phone, wherever I am. Once that connection worked, I kept finding new things to build around it. I enjoy that process of turning an idea into something useful, then discovering what else it could become.</p>
+    </div>
+    {personal.photo && <figure class="about__photo"><Image src={personal.photo.src} alt={personal.photo.alt} width={480} widths={[240, 480, 720]} sizes="(max-width: 640px) 180px, 240px" format="webp" quality={85} loading="lazy" decoding="async" />{personal.photo.caption && <figcaption>{personal.photo.caption}</figcaption>}</figure>}
   </div>
-  <div class:list={['about__personal', { 'about__personal--with-photo': personal.photo }]}>
-    {personal.photo && <figure class="about__photo"><Image src={personal.photo.src} alt={personal.photo.alt} width={480} widths={[240, 480, 720]} sizes="(max-width: 1024px) 180px, 190px" format="webp" quality={85} loading="lazy" decoding="async" />{personal.photo.caption && <figcaption>{personal.photo.caption}</figcaption>}</figure>}
+  <div class="about__personal">
     <article class="personal-note" aria-labelledby="personal-music">
       <p class="personal-note__label">Creative interests</p>
-      <h3 id="personal-music">Music, in the mix.</h3>
-      <p>{personal.music}</p>
+      <h3 id="personal-music">Always listening, learning to play.</h3>
+      {personal.music.map(paragraph => <p>{paragraph}</p>)}
     </article>
     <article class="personal-note" aria-labelledby="personal-seoul">
       <p class="personal-note__label">Study abroad · 2024</p>
-      <h3 id="personal-seoul">A summer in Seoul.</h3>
-      <p>{personal.seoul}</p>
+      <h3 id="personal-seoul">A summer in South Korea.</h3>
+      {personal.seoul.map(paragraph => <p>{paragraph}</p>)}
     </article>
+  </div>
+  <div class="about__travel" aria-label="Photos from South Korea study abroad">
+    {personal.travelPhotos.map(photo => <figure><Image src={photo.src} alt={photo.alt} width={960} widths={[480, 720, 960, 1280]} sizes="(max-width: 640px) 100vw, 50vw" format="webp" quality={85} loading="lazy" decoding="async" /><figcaption>{photo.caption}</figcaption></figure>)}
   </div>
 </section>
