@@ -1,24 +1,9 @@
-# Mira Bhakta
+## Mira Bhakta
 
-My personal website: **[mirabhakta.me](https://mirabhakta.me)**
+**[Visit my portfolio](https://mirabhakta.me)**
 
-I'm a Computer Science student at Cal Poly Pomona, minoring in Economics. I spend a lot of my time working on AI, software projects, and research.
+I'm a Computer Science major and Economics minor at Cal Poly Pomona. This site brings together the projects I've built, my research and experience, and the interests that shape what I make.
 
-I made this site to have one place for my work, experience, and whatever I'm currently building.
+Built with Astro, TypeScript, and Tailwind CSS. Hosted on GitHub Pages.
 
-## The website
-
-The design is called **Soft Monument**. I wanted something modern and minimal, but still a little creative and personal.
-
-It's built with Astro, TypeScript, and Tailwind CSS, and hosted on GitHub Pages.
-
-## Running locally
-
-```bash
-npm ci
-npm run dev
-```
-
-## Links
-
-[Website](https://mirabhakta.me) · [LinkedIn](https://www.linkedin.com/in/mirabhakta) · [Email](mailto:miraabhakta@gmail.com)
+[LinkedIn](https://www.linkedin.com/in/mirabbhakta/) · [Email](mailto:miraabhakta@gmail.com)
