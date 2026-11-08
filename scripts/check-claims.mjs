@@ -178,7 +178,7 @@ check('no link to the private VoiceStudio repository', !/github\.com\/mirabhakta
 check('ContextOS is presented as a private project', /Private project/.test(work), 'missing');
 check('VoiceStudio Live is presented as a private project', /VoiceStudio Live/.test(work), 'missing');
 check('VoiceStudio credits its open-source base', work.includes('https://github.com/debpalash/VoiceStudio'), 'missing');
-check('VoiceStudio credits Applio', work.includes('https://github.com/IAHispano/Applio'), 'missing');
+check('VoiceStudio credits Applio', /href:\s*['"]https:\/\/github\.com\/IAHispano\/Applio['"]/.test(work), 'missing');
 check('VoiceStudio describes live pitch correction and RVC', /key-aware pitch correction/.test(work) && /Applio-backed voice conversion/.test(work), 'missing');
 
 if (failures.length) {
