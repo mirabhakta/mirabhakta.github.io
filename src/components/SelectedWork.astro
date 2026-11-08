@@ -1,4 +1,5 @@
 ---
+import ArrowIcon from "./ArrowIcon.astro";
 import { projects } from '../data/projects';
 import WorkVisual from './WorkVisual.astro';
 ---
@@ -19,7 +20,7 @@ import WorkVisual from './WorkVisual.astro';
         <p class="project__kind">{project.kind}</p>
         <p class="project__summary">{project.summary}</p>
         <p class="project__stack">{project.shortStack}</p>
-        <a class="text-link" href={`/work/${project.slug}/`}>Explore {project.name} <span aria-hidden="true">↗</span></a>
+        <a class="text-link" href={`/work/${project.slug}/`}>Explore {project.name} <ArrowIcon /></a>
         </div>
       </article>
     ))}

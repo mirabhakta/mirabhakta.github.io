@@ -27,8 +27,8 @@ export const personal: {
   travelPhotos: [
     {
       src: koreaGroup,
-      alt: 'Cal Poly Pomona study-abroad cohort wearing hanbok outside a traditional Korean building.',
-      caption: 'South Korea study abroad · Summer 2024',
+      alt: 'Cal Poly Pomona study-abroad cohort wearing hanbok outside the main building of Cheong Wa Dae, the Blue House, in Seoul.',
+      caption: 'Cheong Wa Dae (Blue House), Seoul · Summer 2024',
     },
     {
       src: webtoonVisit,
