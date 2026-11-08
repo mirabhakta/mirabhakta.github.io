@@ -8,8 +8,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* the header is fixed; anchored sections clear it */
-    scroll-padding-top: 6rem;
+    /* One offset keeps anchor targets directly below the sticky header. */
+    scroll-padding-top: var(--header-height, 80px);
   }
 
   body {

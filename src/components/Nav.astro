@@ -1,11 +1,12 @@
 ---
+import ArrowIcon from "./ArrowIcon.astro";
 import { nav } from '../data/site';
 ---
 
 <header class="site-header page-gutter">
   <a class="wordmark" href="/#top" aria-label="Mira Bhakta, home">MB</a>
 
-  <a class="header-email" href="mailto:miraabhakta@gmail.com">Get in touch <span aria-hidden="true">↗</span></a>
+  <a class="header-email" href="mailto:miraabhakta@gmail.com">Get in touch <ArrowIcon /></a>
   <button class="site-nav__toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
     <span class="site-nav__toggle-label">Menu</span>
   </button>
@@ -25,18 +26,30 @@ import { nav } from '../data/site';
   // The nav element carries the id in the markup, so the toggle's
   // aria-controls always points at a real element. The script only adds
   // behaviour; without it the links stay in the document and remain usable.
-  const header = document.querySelector('.site-header');
+  const header = document.querySelector<HTMLElement>('.site-header');
   const toggle = header?.querySelector<HTMLButtonElement>('.site-nav__toggle');
   const nav = header?.querySelector<HTMLElement>('.site-nav');
 
   if (header && toggle && nav) {
     document.documentElement.classList.add('js');
 
+    // Measure the closed header so font scaling and responsive layouts use
+    // the same anchor offset. Opening the mobile menu must not enlarge it.
+    const updateHeaderHeight = () => {
+      if (!header.classList.contains('nav-open')) {
+        document.documentElement.style.setProperty('--header-height', `${header.getBoundingClientRect().height}px`);
+      }
+    };
+    updateHeaderHeight();
+    const headerObserver = new ResizeObserver(updateHeaderHeight);
+    headerObserver.observe(header);
+
     const close = () => {
       toggle.setAttribute('aria-expanded', 'false');
       const label = toggle.querySelector('.site-nav__toggle-label');
       if (label) label.textContent = 'Menu';
       header.classList.remove('nav-open');
+      updateHeaderHeight();
     };
 
     const open = () => {

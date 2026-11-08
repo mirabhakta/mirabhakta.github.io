@@ -32,10 +32,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:image" content={new URL(image, Astro.site)} />
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#f5f3ed" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2317171a'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23f2f1ee' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E"
-    />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=mb1" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg?v=mb1" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=mb1" />
 
     <link rel="preconnect" href="https://api.fontshare.com" />
     <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />

@@ -11,21 +11,25 @@ import { Image } from 'astro:assets';
       <p>I’m Mira, a Computer Science student at Cal Poly Pomona with an Economics minor. I’ve always been drawn to creating something of my own—something people find useful and that makes a meaningful difference in their lives.</p>
       <p>My projects often start with something I want to make possible. Jarvis began with a simple idea: staying connected to my laptop and working on side projects from my phone, wherever I am. Once that connection worked, I kept finding new things to build around it. I enjoy that process of turning an idea into something useful, then discovering what else it could become.</p>
     </div>
-    {personal.photo && <figure class="about__photo"><Image src={personal.photo.src} alt={personal.photo.alt} width={480} widths={[240, 480, 720]} sizes="(max-width: 640px) 180px, 240px" format="webp" quality={85} loading="lazy" decoding="async" />{personal.photo.caption && <figcaption>{personal.photo.caption}</figcaption>}</figure>}
+    {personal.photo && <figure class="about__photo"><Image src={personal.photo.src} alt={personal.photo.alt} width={560} widths={[280, 560, 840]} sizes="(max-width: 640px) 200px, (max-width: 1024px) 225px, 280px" format="webp" quality={85} loading="lazy" decoding="async" />{personal.photo.caption && <figcaption>{personal.photo.caption}</figcaption>}</figure>}
   </div>
   <div class="about__personal">
     <article class="personal-note" aria-labelledby="personal-music">
-      <p class="personal-note__label">Creative interests</p>
-      <h3 id="personal-music">Always listening, learning to play.</h3>
-      {personal.music.map(paragraph => <p>{paragraph}</p>)}
+      <div>
+        <p class="personal-note__label">Creative interests</p>
+        <h3 id="personal-music">Always listening, learning to play.</h3>
+      </div>
+      <div class="personal-note__body">{personal.music.map(paragraph => <p>{paragraph}</p>)}</div>
     </article>
     <article class="personal-note" aria-labelledby="personal-seoul">
-      <p class="personal-note__label">Study abroad · 2024</p>
-      <h3 id="personal-seoul">A summer in South Korea.</h3>
-      {personal.seoul.map(paragraph => <p>{paragraph}</p>)}
+      <div>
+        <p class="personal-note__label">Study abroad · 2024</p>
+        <h3 id="personal-seoul">A summer in South Korea.</h3>
+      </div>
+      <div class="personal-note__body">{personal.seoul.map(paragraph => <p>{paragraph}</p>)}</div>
+      <div class="about__travel" aria-label="Photos from South Korea study abroad">
+        {personal.travelPhotos.map(photo => <figure><Image src={photo.src} alt={photo.alt} width={960} widths={[480, 720, 960, 1280]} sizes="(max-width: 640px) 100vw, 50vw" format="webp" quality={85} loading="lazy" decoding="async" /><figcaption>{photo.caption}</figcaption></figure>)}
+      </div>
     </article>
-  </div>
-  <div class="about__travel" aria-label="Photos from South Korea study abroad">
-    {personal.travelPhotos.map(photo => <figure><Image src={photo.src} alt={photo.alt} width={960} widths={[480, 720, 960, 1280]} sizes="(max-width: 640px) 100vw, 50vw" format="webp" quality={85} loading="lazy" decoding="async" /><figcaption>{photo.caption}</figcaption></figure>)}
   </div>
 </section>
